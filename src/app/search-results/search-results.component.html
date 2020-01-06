@@ -1,0 +1,10 @@
+<div class="container">
+    <img [@hideShowAnime]="hideShow" id="maps" src="../../assets/google-maps.jpg" />
+    <button class="btn" (click)="hideAndShow()">Hide/Show</button>
+</div>
+
+<div *ngIf="entreprises" class="entreprises">
+    <div class="results" *ngFor="let entreprise of entreprises">
+        <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+    <div *ngFor="let commentaire of commentaires" class="commentaires">
+        <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
+    </div>
+</div>
+<div *ngIf="!commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+    <h1>No comments</h1>
+</div>
