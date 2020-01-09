@@ -1,0 +1,27 @@
+#top-bar {
+  background-color: grey;
+  position: sticky;
+  top: 0;
+  height: 33px;
+  margin-bottom: 20px;
+}
+
+.caseBlancheImg {
+  width: 25px;
+  margin-top: 3px;
+  margin-left: 8px;
+}
+
+.title {
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: large;
+  margin-top: 3px;
+}
+
+#top-bar > a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}

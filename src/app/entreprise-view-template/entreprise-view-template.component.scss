@@ -1,15 +1,15 @@
 .globalContainer {
   display: flex;
   border: 2px solid black;
-  border-radius: 5px;
+  border-radius: 2%;
   width: 500px;
   justify-content: space-between;
   text-decoration: none;
   color: black;
 }
 
-.imageEtInfos{
-    display: flex;
+.imageEtInfos {
+  display: flex;
 }
 
 .infos {
@@ -17,15 +17,15 @@
   flex-flow: column;
 }
 
-.etoiles {
-  display: flex;
+.nom {
+  font-weight: bold;
+  font-size: medium;
 }
 
 .logo {
   border-radius: 50%;
   width: 80px;
   height: 80px;
-  
 }
 
 .image {
@@ -41,6 +41,10 @@
   padding-right: 4px;
 }
 
+.etoiles {
+  display: flex;
+}
+
 .etoile {
   width: 25px;
   height: 25px;
@@ -48,6 +52,11 @@
   color: black;
 }
 
-.caseBlanche{
-    align-self: center;
+.caseBlanche {
+  align-self: center;
+  padding-right: 15px;
+}
+
+.caseBlancheImage{
+  width: 25px;
 }

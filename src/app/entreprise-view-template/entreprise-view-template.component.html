@@ -14,7 +14,7 @@
             </div>
             <div class="etoiles">
                 <span *ngFor="let star of yellowStarDisplayer">
-                    <span><img class="etoile" src="../../assets/Etoile_jaune.png" /></span>
+                    <img class="etoile" src="../../assets/Etoile_jaune.png" />
                 </span>
                 <span *ngIf="!isInteger(entreprise.note)">
                     <img class="etoile" src="../../assets/Etoile_demi.PNG" />
@@ -26,6 +26,6 @@
         </div>
     </div>
     <div class="caseBlanche">
-        Case Blanche
+        <img class="caseBlancheImage" src="../../assets/case.png" />
     </div>
 </a>

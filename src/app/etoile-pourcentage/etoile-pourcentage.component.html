@@ -1,0 +1,65 @@
+<div class="global-container">
+    <div class="etoilesEtPourcentage">
+        <div class="etoiles">
+            <img class="etoile" src="../../assets/Etoile_jaune.png" />
+            <div *ngFor="let star of fourStarsTab">
+                <img class="etoile" src="../../assets/Etoile_grise.png" />
+            </div>
+        </div>
+        <div class="pourcentage">
+            <span class="pourcentageValue" *ngIf="commentairesValides(commentaires)">{{pourcentCommentairesNote(commentaires, 1)}}%</span>
+            <span class="pourcentageValue" *ngIf="!commentairesValides(commentaires)">0%</span>
+        </div>
+    </div>
+    <div class="etoilesEtPourcentage">
+        <div class="etoiles">
+            <div *ngFor="let star of twoStarsTab">
+                <img class="etoile" src="../../assets/Etoile_jaune.png" />
+            </div>
+            <div *ngFor="let star of threeStarsTab">
+                <img class="etoile" src="../../assets/Etoile_grise.png" />
+            </div>
+        </div>
+        <div class="pourcentage">
+            <span class="pourcentageValue" *ngIf="commentairesValides(commentaires)">{{pourcentCommentairesNote(commentaires, 2)}}%</span>
+            <span class="pourcentageValue" *ngIf="!commentairesValides(commentaires)">0%</span>
+        </div>
+    </div>
+    <div class="etoilesEtPourcentage">
+        <div class="etoiles">
+            <div *ngFor="let star of threeStarsTab">
+                <img class="etoile" src="../../assets/Etoile_jaune.png" />
+            </div>
+            <div *ngFor="let star of twoStarsTab">
+                <img class="etoile" src="../../assets/Etoile_grise.png" />
+            </div>
+        </div>
+        <div class="pourcentage">
+            <span class="pourcentageValue" *ngIf="commentairesValides(commentaires)">{{pourcentCommentairesNote(commentaires, 3)}}%</span>
+            <span class="pourcentageValue" *ngIf="!commentairesValides(commentaires)">0%</span>
+        </div>
+    </div>
+    <div class="etoilesEtPourcentage">
+        <div class="etoiles">
+            <div *ngFor="let star of fourStarsTab">
+                <img class="etoile" src="../../assets/Etoile_jaune.png" />
+            </div>
+            <img class="etoile" src="../../assets/Etoile_grise.png" />
+        </div>
+        <div class="pourcentage">
+            <span class="pourcentageValue" *ngIf="commentairesValides(commentaires)">{{pourcentCommentairesNote(commentaires, 4)}}%</span>
+            <span class="pourcentageValue" *ngIf="!commentairesValides(commentaires)">0%</span>
+        </div>
+    </div>
+    <div class="etoilesEtPourcentage">
+        <div class="etoiles">
+            <div *ngFor="let star of fiveStarsTab">
+                <img class="etoile" src="../../assets/Etoile_jaune.png" />
+            </div>
+        </div>
+        <div class="pourcentage">
+            <span class="pourcentageValue" *ngIf="commentairesValides(commentaires)">{{pourcentCommentairesNote(commentaires, 5)}}%</span>
+            <span class="pourcentageValue" *ngIf="!commentairesValides(commentaires)">0%</span>
+        </div>
+    </div>
+</div>

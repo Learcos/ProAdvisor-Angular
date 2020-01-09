@@ -6,17 +6,19 @@ export class Entreprise {
     nom: string;
     categories: Categorie[];
     note: number;
-    description?: string;
     adresse?: Adresse;
+    description?: string;
     logo?: string;
+    type?: string;
 
-    constructor(id: number, nom: string, note: number, categories: Categorie[], description?: string, adresse?: Adresse, logo?: string) {
+    constructor(id: number, nom: string, note: number, categories: Categorie[], adresse?: Adresse, description?: string, logo?: string, type?: string) {
         this.id = id;
         this.nom = nom;
         this.note = note;
         this.categories = categories;
-        this.description = description;
         this.adresse = adresse;
-        this.logo = logo? logo : './assets/person-logo.jpg'
+        this.description = description ? description : 'Je suis une bien belle entreprise'
+        this.logo = logo ? logo : './assets/logo-entreprise.png';
+        this.type = type ? type : 'entreprise'
     }
 }

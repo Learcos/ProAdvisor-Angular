@@ -1,18 +1,24 @@
+.top-bar{
+  position: sticky;
+  top: 0;
+}
+
 #maps {
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 33px;
   left: 0;
 }
 
 .container {
   position: relative;
   width: 50%;
+  margin: 8px 8px 8px 8px;
 }
 
 .container .btn {
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -34,6 +40,6 @@
 }
 
 .entreprises{
-  margin-top: 370px;
+  margin: 320px 8px;
 }
 

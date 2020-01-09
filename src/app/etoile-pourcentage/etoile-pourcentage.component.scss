@@ -1,0 +1,30 @@
+.global-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+  margin-left: 15%;
+}
+
+.etoilesEtPourcentage {
+  display: flex;
+  flex-direction: column;
+  margin: 0 8px 0 8px;
+}
+
+.etoile {
+  width: 17px;
+  height: 17px;
+  padding-right: 1px;
+}
+
+.etoiles {
+  display: flex;
+}
+
+.pourcentage {
+  border: 1px solid;
+}
+
+.pourcentageValue{
+    margin-left: 3px;
+}

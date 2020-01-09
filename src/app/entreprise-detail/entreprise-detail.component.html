@@ -1,8 +1,44 @@
-<div *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay">
-    <div *ngFor="let commentaire of commentaires" class="commentaires">
-        <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
+<app-top-bar></app-top-bar>
+
+<div class="globalContainer">
+    <div class="imageEtInfos">
+        <div class="image">
+            <img class="logo" src={{entreprise.logo}} />
+        </div>
+        <div class="infos">
+            <div class="nom">
+                {{entreprise.nom}}
+            </div>
+            <div class="categories">
+                <div class="categorie" *ngFor="let categorie of entreprise.categories">
+                    {{categorie.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="etoiles">
+        <span *ngFor="let star of yellowStarDisplayer">
+            <span><img class="etoile" src="../../assets/Etoile_jaune.png" /></span>
+        </span>
+        <span *ngIf="!isInteger(entreprise.note)">
+            <img class="etoile" src="../../assets/Etoile_demi.PNG" />
+        </span>
+        <span *ngFor="let star of greyStarDisplayer">
+            <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
+        </span>
     </div>
 </div>
-<div *ngIf="!commentairesValidesPourAffichage(commentaires) && readyToDisplay">
-    <h1>No comments</h1>
+
+<app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
+
+
+<div class="commentairesContainer">
+    <div *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+        <div *ngFor="let commentaire of commentaires" class="commentaires">
+            <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
+        </div>
+    </div>
+    <div *ngIf="!commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+        <h1>No comments</h1>
+    </div>
 </div>

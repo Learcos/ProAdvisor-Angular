@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Entreprise } from '../entreprise';
 import { EntrepriseService } from '../entreprise.service';
 import { Commentaire } from '../commentaire';
@@ -14,6 +14,8 @@ export class EntrepriseDetailComponent implements OnInit {
   entreprise: Entreprise;
   commentaires: Commentaire[];
   readyToDisplay: boolean = false;
+  yellowStarDisplayer: Array<number>;
+  greyStarDisplayer: Array<number>;
 
   constructor(private entrepriseService: EntrepriseService, private commentaireService: CommentaireService) { }
 
@@ -22,7 +24,6 @@ export class EntrepriseDetailComponent implements OnInit {
       .subscribe(commentaires => {
         this.commentaires = commentaires;
         this.readyToDisplay = true;
-        console.log(commentaires);
       })
   }
 
@@ -36,9 +37,15 @@ export class EntrepriseDetailComponent implements OnInit {
     }
   }
 
+  isInteger(number: number): boolean{
+    return Math.floor(number) == number;
+  }
+
   ngOnInit() {
     this.storeEntrepriseCliquee();
     this.entreprise = JSON.parse(localStorage.getItem('entreprise'));
+    this.yellowStarDisplayer = new Array(Math.floor(this.entreprise.note));
+    this.greyStarDisplayer = new Array(Math.floor(5 - this.entreprise.note))
     this.getCommentairesParEntreprise(this.entreprise);
   }
 

@@ -15,7 +15,7 @@ export class EntrepriseService {
   private entrepriseClique: Entreprise;
 
   //retourne toutes les entreprises
-  getEntreprises(): Observable<Entreprise[]> {  
+  getEntreprises(): Observable<Entreprise[]> {
     return this.http.get<Entreprise[]>(this.entreprisesUrl)
       .pipe(
         catchError(this.handleError<Entreprise[]>('getEntreprises', []))
@@ -34,32 +34,32 @@ export class EntrepriseService {
   }
 
   //utilisé dans un 1er temps pour la barre de recherche d'entreprise
-  getEntreprisesContenantChain(chain: string) {
+  getEntreprisesContenantChain(chain: string): Observable<Entreprise[]> {
     return this.http.get<Entreprise[]>(this.entreprisesUrl)
       .pipe(
         map(entreprises => this.filtreEntreprisesContenantChain(entreprises, chain)),
-        catchError(this.handleError<Entreprise[]>(`getEntreprisesContenantChain, chain:${chain}`, []))
+        catchError(this.handleError<Entreprise[]>(`getEntreprisesParCategories, categorie:${chain}`, []))
       )
   }
 
   //méthode générique utilisée pour retourner les entreprises peu importe les filtres de catégorie et sur la barre de recherche
   getEntreprisesGenerique(inputValue?: string, categorieName?: string): Observable<Entreprise[]> {
-    if(this.isStringValide(inputValue)){
-      return this.getEntreprisesContenantChain(inputValue);
-    }
-    else if(this.isStringValide(categorieName)){
+    if (this.isStringValide(categorieName)) {
       return this.getEntreprisesParCategories(categorieName);
     }
-    else{
-      return this.getEntreprises();
+    else{ //if (this.isStringValide(inputValue)) 
+      return this.getEntreprisesContenantChain(inputValue);
     }
+    //else {
+    //  return this.getEntreprises();
+    //}
   }
 
-  storeEntrepriseClique(entreprise: Entreprise){
+  storeEntrepriseClique(entreprise: Entreprise) {
     this.entrepriseClique = entreprise;
   }
 
-  retrieveEntrepriseClique(): Entreprise{
+  retrieveEntrepriseClique(): Entreprise {
     return this.entrepriseClique;
   }
 
@@ -68,9 +68,27 @@ export class EntrepriseService {
   *  ci-dessous: méthodes utilisaires employées dans les get au-dessus
   */
 
-  //filtre les entreprises sur leur nom qui doit contenir chain
-  filtreEntreprisesContenantChain(entreprises: Entreprise[], chain: string) {
-    return entreprises.filter(entreprise => entreprise.nom.toLowerCase().trim().includes(chain.toLowerCase()));
+  filtreEntreprisesContenantChain(entreprises: Entreprise[], chain: string){
+    return entreprises.filter(entreprise => this.entrepriseContientChain(entreprise, chain));
+  }
+
+  /* 
+  *  une méthode générique qui loop sur les propriétés d'entreprise et qui regarde si le type de la propriété est string, si la propriété
+  *  contient la chaîne testée serait bien, mais je ne sais pas comment faire dans le cas où la propriété est aussi un objet qui a une autre 
+  *  propriété qui est un string (comme catégorie)
+  */
+  entrepriseContientChain(entreprise: Entreprise, chain: string): boolean {
+    let chain2 = chain.toLowerCase().trim();
+    let contient: boolean = false;
+    if (entreprise.nom.toLowerCase().trim().includes(chain2)) {
+      contient = true;
+    }
+    entreprise.categories.forEach(
+      categorie => {
+        if (categorie.name.toLowerCase().trim() == chain2) contient = true;
+      }
+    )
+    return contient;
   }
 
   filtreEntreprisesParCategorie(entreprises: Entreprise[], categorieName: string): Entreprise[] {
@@ -91,7 +109,7 @@ export class EntrepriseService {
     return appartient;
   }
 
-  isStringValide(chain: string): boolean{
+  isStringValide(chain: string): boolean {
     return chain != "" && chain != undefined && chain != null;
   }
 

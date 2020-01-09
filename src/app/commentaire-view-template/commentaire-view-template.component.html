@@ -11,13 +11,13 @@
             </div>
             <div class="etoiles">
                 <span *ngFor="let star of yellowStarDisplayer">
-                    <span><img class="etoile" src="../../assets/Etoile_jaune.png" /></span>
+                    <img class="etoile" src="../../assets/Etoile_jaune.png" />
                 </span>
                 <span *ngIf="!isInteger(commentaire.note)">
                     <img class="etoile" src="../../assets/Etoile_demi.PNG" />
                 </span>
                 <span *ngFor="let star of greyStarDisplayer">
-                    <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
+                    <img class="etoile" src="../../assets/Etoile_grise.png" />
                 </span>
             </div>
             <div class="text">
@@ -26,6 +26,6 @@
         </div>
     </div>
     <div *ngIf="objectEstValide(commentaire.AFNOR) && commentaire.AFNOR" class="AFNOR">
-        Check AFNOR
+        <img src="../../assets/check-logo.png">
     </div>
 </div>

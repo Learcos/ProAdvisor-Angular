@@ -1,3 +1,62 @@
-.commentaires{
-    padding-bottom: 15px;
+.globalContainer {
+  display: flex;
+  justify-content: space-evenly;
+  text-decoration: none;
+  align-items: center;
+  color: black;
+  margin-bottom: 2%;
+}
+
+.imageEtInfos {
+  display: flex;
+  align-items: center;
+}
+
+.nom {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.infos {
+  display: flex;
+  flex-flow: column;
+}
+
+.etoiles {
+  display: flex;
+}
+
+.logo {
+  border: 2px solid gray;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.image {
+  width: 125px;
+  padding: 1px 5px 1px 8px;
+}
+
+.categories {
+  display: flex;
+}
+
+.categorie {
+  padding-right: 4px;
+}
+
+.etoile {
+  width: 25px;
+  height: 25px;
+  padding-right: 1px;
+  color: black;
+}
+
+.commentaires {
+  padding-bottom: 15px;
+}
+
+.commentairesContainer{
+  margin-left: 15%;
 }
