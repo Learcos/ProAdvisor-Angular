@@ -27,8 +27,8 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const entreprises: Entreprise[] = [
-      new Entreprise(1, 'Gégé-Peinture', 3.5, [categories[0]], 'Ma peinture vraiment au top' ),
-      new Entreprise(2, 'Jacques-Peinture', 1.6, [categories[0]], "Gégé-Peinture l'arnaqueur, c'est moi qu'est bien" ),
+      new Entreprise(1, 'Gégé-Peinture', 3.5, [categories[0]]),
+      new Entreprise(2, 'Jacques-Peinture', 1.6, [categories[0]]),
       new Entreprise(3, 'Van Gogh Peinture', 2, [categories[0]] ),
       new Entreprise(4, 'Archigram', 3.5, [categories[0], categories[1]], "Archi top"),
       new Entreprise(5, 'Cabinet Le Corbusier', 4, [categories[1]], "Archi bien" ),
@@ -37,7 +37,7 @@ export class InMemoryDataService implements InMemoryDbService {
       new Entreprise(8, 'Pro-Menuiserie', 3.6, [categories[4]]),
       new Entreprise(9, 'Passion moto', 1.6, [categories[0], categories[2], categories[4]]),
       new Entreprise(10, 'Passion auto', 1.6, [categories[5]] ),
-      new Entreprise(11, 'Passion auto moto', 5, [categories[5]] ),
+      new Entreprise(11, 'Passion auto moto', 5, [categories[5]] ), 
       new Entreprise(12, 'Passion jardin', 1.6, [categories[6]] ),
       new Entreprise(13, 'Passion panneaux', 5, [categories[7]] ),
       new Entreprise(14, 'Passion solaire', 4.6, [categories[7]]),
@@ -69,12 +69,12 @@ export class InMemoryDataService implements InMemoryDbService {
     ]
 
     const auteurs: Auteur[] = [
-      new Auteur(1, new Date('December 17, 2018 03:24:00'), 'Jean le Monsieur', adresses[0]),
-      new Auteur(2, new Date('December 17, 2018 03:24:00'), 'Steph Anie'),
-      new Auteur(3, new Date('December 17, 2018 03:24:00'), 'Mar Jorie', adresses[14]),
-      new Auteur(4, new Date('December 17, 2018 03:24:00'), 'Tia Laeti'),
-      new Auteur( 5, new Date('December 17, 2018 03:24:00'), 'Bet Ty'),
-      new Auteur( 6, new Date('December 17, 2018 03:24:00'), 'G Rom du 13', adresses[2]),
+      new Auteur(1, new Date('December 17, 2018 03:24:00'), 'Jean ', adresses[0]),
+      new Auteur(2, new Date('December 17, 2018 03:24:00'), 'Stephanie'),
+      new Auteur(3, new Date('December 17, 2018 03:24:00'), 'Marjorie', adresses[14]),
+      new Auteur(4, new Date('December 17, 2018 03:24:00'), 'Laetitia'),
+      new Auteur( 5, new Date('December 17, 2018 03:24:00'), 'Lisa'),
+      new Auteur( 6, new Date('December 17, 2018 03:24:00'), 'Jérôme du 13', adresses[2]),
       new Auteur( 7, new Date('December 17, 2018 03:24:00'), '7'),
       new Auteur(8, new Date('December 17, 2018 03:24:00'), '8'),
       new Auteur(9, new Date('December 17, 2018 03:24:00'), '9', adresses[1]),

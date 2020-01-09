@@ -1,7 +1,7 @@
 .globalContainer {
   display: flex;
   border: 2px solid black;
-  border-radius: 5px;
+  border-radius: 2%;
   width: 500px;
   justify-content: space-between;
   text-decoration: none;
@@ -17,8 +17,9 @@
   flex-flow: column;
 }
 
-.etoiles {
-  display: flex;
+.nom{
+  font-weight: bold;
+  font-size: medium;
 }
 
 .logo {
@@ -39,6 +40,10 @@
 
 .categorie {
   padding-right: 4px;
+}
+
+.etoiles {
+  display: flex;
 }
 
 .etoile {

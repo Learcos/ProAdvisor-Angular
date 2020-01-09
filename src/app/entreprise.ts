@@ -17,6 +17,6 @@ export class Entreprise {
         this.categories = categories;
         this.description = description;
         this.adresse = adresse;
-        this.logo = logo? logo : './assets/person-logo.jpg'
+        this.logo = logo? logo : './assets/logo-entreprise.png'
     }
 }
