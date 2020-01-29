@@ -17,5 +17,4 @@ export class Auteur{
         this.avatar = avatar ? avatar : './assets/person-logo.jpg';
         this.nombreCommentairesPostes = nombreCommentairesPostes;
     }
-
 }

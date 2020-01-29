@@ -10,3 +10,19 @@
         <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
     </div>
 </div>
+
+<div class="rectangle">
+    <div class="nbResults">
+        <span class="title">Nombre de résultats: </span>
+        <span *ngIf="entreprises">{{entreprises.length}}</span>
+        <span *ngIf="entreprises == undefined || entreprises == []">
+            0
+        </span>
+    </div>
+    <div class="top-companies">
+        <div class="title">Top entreprises:</div>
+        <div *ngIf="entreprises">1. {{topEntreprises[0].nom}}</div>
+        <div *ngIf="entreprises.length > 1">2. {{topEntreprises[1].nom}}</div>
+        <div *ngIf="entreprises.length > 2">3. {{topEntreprises[2].nom}}</div>
+    </div>
+</div>

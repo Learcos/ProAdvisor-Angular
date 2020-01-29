@@ -10,6 +10,21 @@
   left: 0;
 }
 
+.rectangle{
+  position: fixed;
+  left: 70%;
+  top: 50%;
+  border: 1px solid;
+}
+
+.nbResults{
+  margin-bottom: 10px;
+}
+
+.title{
+  font-weight: bold;
+}
+
 .container {
   position: relative;
   width: 50%;
@@ -40,6 +55,6 @@
 }
 
 .entreprises{
-  margin: 320px 8px;
+  margin: 320px 10%;
 }
 

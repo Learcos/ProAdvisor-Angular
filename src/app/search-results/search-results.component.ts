@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EntrepriseViewTemplateComponent } from '../entreprise-view-template/entreprise-view-template.component';
 import { Entreprise } from '../entreprise';
@@ -21,16 +21,41 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class SearchResultsComponent implements OnInit {
 
-  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute) { }
 
   categorieClicked: string;
   inputValue: string;
   entreprises: Entreprise[];
+  entreprisesBis: Entreprise[];
+  topEntreprises: Entreprise[];
 
 
   getEntreprisesGenerique(inputValue?: string, categorie?: string): void {
     this.entrepriseService.getEntreprisesGenerique(inputValue, categorie)
-      .subscribe(entreprises => this.entreprises = entreprises);
+      .subscribe(entreprises => {
+        this.entreprises = entreprises;
+        this.entreprisesBis = entreprises;
+        this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
+      });
+  }
+
+  entreprisesValides(entreprises: Entreprise[]) {
+    return entreprises != undefined && entreprises != null && entreprises != [];
+  }
+
+
+  storeEntreprise(entreprise: Entreprise) {
+    this.entrepriseService.storeEntrepriseClique(entreprise);
+  }
+
+
+  retourneTopEntreprises(entreprises: Entreprise[]) {
+    if (entreprises.length == 1) return entreprises;
+    else {
+      return entreprises.sort(function (a, b) {
+        return b.note - a.note;
+      })
+    }
   }
 
 
@@ -40,12 +65,6 @@ export class SearchResultsComponent implements OnInit {
     this.categorieClicked = this.route.snapshot.paramMap.get("categorie");
     this.getEntreprisesGenerique(this.inputValue, this.categorieClicked);
   }
-
-
-  storeEntreprise(entreprise: Entreprise){
-    this.entrepriseService.storeEntrepriseClique(entreprise);
-  }
-
 
   //en-dessous: pour l'animation de la carte
   hideShow: string = 'show';

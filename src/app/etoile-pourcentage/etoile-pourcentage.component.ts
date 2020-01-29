@@ -31,7 +31,6 @@ export class EtoilePourcentageComponent implements OnInit {
   }
 
   commentairesValides(commentaires: Commentaire[]): boolean{
-    console.log(commentaires)
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
