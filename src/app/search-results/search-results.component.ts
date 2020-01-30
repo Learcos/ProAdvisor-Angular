@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EntrepriseViewTemplateComponent } from '../entreprise-view-template/entreprise-view-template.component';
 import { Entreprise } from '../entreprise';
@@ -40,7 +40,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   entreprisesValides(entreprises: Entreprise[]) {
-    return entreprises != undefined && entreprises != null && entreprises != [];
+    return entreprises !== undefined && entreprises != null && entreprises !== [];
   }
 
 
@@ -59,17 +59,14 @@ export class SearchResultsComponent implements OnInit {
   }
 
 
-  //les entreprises sont récupérées juste après la création du composant avec ngOnInit()
+  // les entreprises sont récupérées juste après la création du composant avec ngOnInit()
   ngOnInit() {
     this.inputValue = this.route.snapshot.paramMap.get("name");
     this.categorieClicked = this.route.snapshot.paramMap.get("categorie");
     this.getEntreprisesGenerique(this.inputValue, this.categorieClicked);
   }
 
-  //en-dessous: pour l'animation de la carte
-  hideShow: string = 'show';
+  // en-dessous: pour l'animation de la carte
+  // hideShow: string = 'show';
 
-  hideAndShow(): void {
-    this.hideShow = (this.hideShow === 'show') ? 'hide' : 'show';
-  }
 }

@@ -18,6 +18,7 @@ import { EntrepriseDetailComponent } from './entreprise-detail/entreprise-detail
 import { CommentaireViewTemplateComponent } from './commentaire-view-template/commentaire-view-template.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { EtoilePourcentageComponent } from './etoile-pourcentage/etoile-pourcentage.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EtoilePourcentageComponent } from './etoile-pourcentage/etoile-pourcent
     CommentaireViewTemplateComponent,
     TopBarComponent,
     EtoilePourcentageComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

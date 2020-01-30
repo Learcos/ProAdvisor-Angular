@@ -6,12 +6,14 @@ export class Entreprise {
     nom: string;
     categories: Categorie[];
     note: number;
-    adresse?: Adresse;
+    adresse: Adresse;
+    lat: number;
+    lng: number;
     description?: string;
     logo?: string;
     type?: string;
 
-    constructor(id: number, nom: string, note: number, categories: Categorie[], adresse?: Adresse, description?: string, logo?: string, type?: string) {
+    constructor(id: number, nom: string, note: number, categories: Categorie[], adresse: Adresse, description?: string, logo?: string, type?: string) {
         this.id = id;
         this.nom = nom;
         this.note = note;

@@ -1,8 +1,7 @@
 <app-top-bar class="top-bar"></app-top-bar>
 
 <div class="container">
-    <img [@hideShowAnime]="hideShow" id="maps" src="../../assets/google-maps.jpg" />
-    <button class="btn" (click)="hideAndShow()">Hide/Show</button>
+<app-map [entreprises]="entreprises"></app-map>
 </div>
 
 <div *ngIf="entreprises" class="entreprises">
