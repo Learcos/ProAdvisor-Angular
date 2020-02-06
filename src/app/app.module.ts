@@ -19,6 +19,8 @@ import { CommentaireViewTemplateComponent } from './commentaire-view-template/co
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { EtoilePourcentageComponent } from './etoile-pourcentage/etoile-pourcentage.component';
 import { MapComponent } from './map/map.component';
+import { ServiceViewTemplateComponent } from './service-view-template/service-view-template.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MapComponent } from './map/map.component';
     TopBarComponent,
     EtoilePourcentageComponent,
     MapComponent,
+    ServiceViewTemplateComponent,
+    ServiceDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +46,9 @@ import { MapComponent } from './map/map.component';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    //HttpClientInMemoryWebApiModule.forRoot(
+    //  InMemoryDataService, { dataEncapsulation: false }
+    //)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@
         </div>
         <div class="infos">
             <div class="nom">
-                {{entreprise.nom}}
+                {{service.urlService}}
             </div>
             <!--<div class="categories">
                 <div class="categorie" *ngFor="let categorie of entreprise.categories">
@@ -38,11 +38,11 @@
     <span>
         <h2>Services proposés:</h2>
     </span>
-    <div *ngIf="entreprise.services.length == 0 ; else showServices">
+    <div *ngIf="!service.services ; else showServices">
         Pas de services proposés connus
     </div>
     <ng-template #showServices>
-        <div *ngFor="let service of entreprise.services">
+        <div *ngFor="let service of service.services">
             <ul>
                 <li>
                     {{service}}

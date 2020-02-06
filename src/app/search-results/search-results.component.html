@@ -1,27 +1,38 @@
 <app-top-bar class="top-bar"></app-top-bar>
 
 <div class="container">
-<app-map [entreprises]="entreprises"></app-map>
+    <app-map [entreprises]="entreprises"></app-map>
 </div>
 
-<div *ngIf="entreprises" class="entreprises">
-    <div class="results" *ngFor="let entreprise of entreprises">
-        <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
+
+<div class="entreprises">
+    <h1>Entreprises</h1>
+    <div *ngIf="entreprises">
+        <div class="results" *ngFor="let entreprise of entreprises">
+            <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
+        </div>
+    </div>
+    <h1>Services</h1>
+    <div *ngIf="services">
+        <div class="results" *ngFor="let service of services">
+            <app-service-view-template [service]="service"></app-service-view-template>
+        </div>
     </div>
 </div>
 
 <div class="rectangle">
     <div class="nbResults">
         <span class="title">Nombre de résultats: </span>
-        <span *ngIf="entreprises">{{entreprises.length}}</span>
-        <span *ngIf="entreprises == undefined || entreprises == []">
-            0
+        <span>
+            {{countNumberOfResults()}}
         </span>
     </div>
+    <!-- 
     <div class="top-companies">
         <div class="title">Top entreprises:</div>
         <div *ngIf="entreprises">1. {{topEntreprises[0].nom}}</div>
         <div *ngIf="entreprises.length > 1">2. {{topEntreprises[1].nom}}</div>
         <div *ngIf="entreprises.length > 2">3. {{topEntreprises[2].nom}}</div>
     </div>
+-->
 </div>

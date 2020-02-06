@@ -5,6 +5,9 @@ import { Categorie } from './categorie';
 import { catchError, map } from 'rxjs/operators';
 import { Commentaire } from './commentaire';
 import { Entreprise } from './entreprise';
+import { EntrepriseApi } from './entrepriseApi';
+import { ServiceApi } from './serviceApi';
+import { CommentairesApi } from './commentaireApi';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +16,25 @@ export class CommentaireService {
 
   constructor(private http: HttpClient) { }
 
-  private commentairesUrl = 'api/commentaires';  // URL to web api
+  private servicesCommentairesUrl = 'https://api.r-pro-advisor.gq/Service';  // URL to web api
+  private entreprisesCommentairesUrl = 'https://api.r-pro-advisor.gq/Entreprise';
 
   //Observable: utile quand les requêtes seront en HTML (asynchrones)
-  getCommentaires(): Observable<Commentaire[]> {
-    return this.http.get<Commentaire[]>(this.commentairesUrl)
+  getCommentaires(entreprise?: EntrepriseApi, service?: ServiceApi): Observable<CommentairesApi[]> {
+    let url: string;
+    if(entreprise !== null && entreprise !== undefined){
+      url = this.entreprisesCommentairesUrl + '/' + entreprise.siret + '/Comments';
+    }
+    else if(service !== null && service !== undefined){
+      url = this.servicesCommentairesUrl + '/' + service.urlService + '/Comments';
+    }
+    return this.http.get<CommentairesApi[]>(url)
       .pipe(
-        catchError(this.handleError<Commentaire[]>('getCommentaires', []))
+        catchError(this.handleError<CommentairesApi[]>('getCommentaires', []))
       );
   }
 
+  /*
   getCommentairesParEntreprise(entreprise: Entreprise): Observable<Commentaire[]> {
     return this.http.get<Commentaire[]>(this.commentairesUrl)
       .pipe(
@@ -34,6 +46,7 @@ export class CommentaireService {
   filtreParEntreprise(commentaires: Commentaire[], entreprise: Entreprise): Commentaire[]{
     return commentaires.filter(commentaire => commentaire.entreprise.id == entreprise.id);
   }
+  */
 
   /**
  * Handle Http operation that failed.

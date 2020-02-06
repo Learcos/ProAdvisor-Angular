@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Entreprise } from './entreprise';
+import { EntrepriseApi } from './entrepriseApi';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,15 @@ export class EntrepriseService {
 
   constructor(private http: HttpClient) { }
 
-  private entreprisesUrl = 'api/entreprises';  // URL to web api
-  private entrepriseClique: Entreprise;
+  private entreprisesUrl = 'https://api.r-pro-advisor.gq/Entreprise';  // URL to web api
+  private entrepriseClique: EntrepriseApi;
+
 
   //retourne toutes les entreprises
-  getEntreprises(): Observable<Entreprise[]> {
-    return this.http.get<Entreprise[]>(this.entreprisesUrl)
-      .pipe(
-        catchError(this.handleError<Entreprise[]>('getEntreprises', []))
+  getEntreprises(): Observable<EntrepriseApi[]> {
+    return this.http.get<EntrepriseApi[]>(this.entreprisesUrl)
+          .pipe(
+        catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
       );
   }
 
@@ -55,11 +57,11 @@ export class EntrepriseService {
     //}
   }
 
-  storeEntrepriseClique(entreprise: Entreprise) {
+  storeEntrepriseClique(entreprise: EntrepriseApi) {
     this.entrepriseClique = entreprise;
   }
 
-  retrieveEntrepriseClique(): Entreprise {
+  retrieveEntrepriseClique(): EntrepriseApi {
     return this.entrepriseClique;
   }
 

@@ -1,4 +1,4 @@
-<a (click)="storeEntreprise(entreprise)" routerLink="/entreprises/{{entreprise.nom}}" class="globalContainer">
+<a (click)="storeService(service)" routerLink="/services/{{service.urlService}}" class="globalContainer">
     <div class="imageEtInfos">
         <div class="image">
             <!--<img class="logo" src={{entreprise.logo}} />-->
@@ -6,7 +6,7 @@
         </div>
         <div class="infos">
             <div class="nom">
-                {{entreprise.nom}}
+                {{service.urlService}}
             </div>
             <!--<div class="categories">
                 <div class="categorie" *ngFor="let service of entreprise.services">

@@ -1,0 +1,62 @@
+.globalContainer {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 2%;
+  width: 500px;
+  justify-content: space-between;
+  text-decoration: none;
+  color: black;
+}
+
+.imageEtInfos {
+  display: flex;
+}
+
+.infos {
+  display: flex;
+  flex-flow: column;
+}
+
+.nom {
+  font-weight: bold;
+  font-size: medium;
+}
+
+.logo {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.image {
+  width: 85px;
+  padding: 1px 5px 1px 8px;
+}
+
+.categories {
+  display: flex;
+}
+
+.categorie {
+  padding-right: 4px;
+}
+
+.etoiles {
+  display: flex;
+}
+
+.etoile {
+  width: 25px;
+  height: 25px;
+  padding-right: 1px;
+  color: black;
+}
+
+.caseBlanche {
+  align-self: center;
+  padding-right: 15px;
+}
+
+.caseBlancheImage {
+  width: 25px;
+}

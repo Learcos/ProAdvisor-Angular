@@ -4,6 +4,9 @@ import { EntrepriseViewTemplateComponent } from '../entreprise-view-template/ent
 import { Entreprise } from '../entreprise';
 import { EntrepriseService } from '../entreprise.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EntrepriseApi } from '../entrepriseApi';
+import { ServiceApi } from '../serviceApi';
+import { ServiceApiService } from '../service-api.service';
 
 @Component({
   selector: 'app-search-results',
@@ -21,49 +24,65 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class SearchResultsComponent implements OnInit {
 
-  constructor(private entrepriseService: EntrepriseService, private route: ActivatedRoute) { }
+  constructor(private entrepriseService: EntrepriseService, private serviceService: ServiceApiService, private route: ActivatedRoute) { }
 
   categorieClicked: string;
   inputValue: string;
-  entreprises: Entreprise[];
-  entreprisesBis: Entreprise[];
-  topEntreprises: Entreprise[];
+  entreprises: EntrepriseApi[];
+  entreprisesBis: EntrepriseApi[];
+  topEntreprises: EntrepriseApi[];
+
+  services: ServiceApi[];
 
 
-  getEntreprisesGenerique(inputValue?: string, categorie?: string): void {
-    this.entrepriseService.getEntreprisesGenerique(inputValue, categorie)
+  getEntreprises(): void {
+    this.entrepriseService.getEntreprises()
       .subscribe(entreprises => {
         this.entreprises = entreprises;
         this.entreprisesBis = entreprises;
-        this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
+        //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
       });
   }
 
-  entreprisesValides(entreprises: Entreprise[]) {
-    return entreprises !== undefined && entreprises != null && entreprises !== [];
+  getServices(): void{
+    this.serviceService.getServices()
+      .subscribe(services => {
+        this.services = services;
+      });
+  }
+
+  tabValide(tab: any[]) {
+    return tab !== undefined && tab != null && tab !== [];
+  }
+
+  countNumberOfResults(){
+    let res = 0;
+    if(this.entreprises){
+      res += this.entreprises.length;
+    }
+    if(this.services){
+      res += this.services.length;
+    }
+    return res;
   }
 
 
-  storeEntreprise(entreprise: Entreprise) {
-    this.entrepriseService.storeEntrepriseClique(entreprise);
-  }
-
-
-  retourneTopEntreprises(entreprises: Entreprise[]) {
+  /*retourneTopEntreprises(entreprises: EntrepriseApi[]) {
     if (entreprises.length == 1) return entreprises;
     else {
       return entreprises.sort(function (a, b) {
         return b.note - a.note;
       })
     }
-  }
+  }*/
 
 
   // les entreprises sont récupérées juste après la création du composant avec ngOnInit()
   ngOnInit() {
     this.inputValue = this.route.snapshot.paramMap.get("name");
     this.categorieClicked = this.route.snapshot.paramMap.get("categorie");
-    this.getEntreprisesGenerique(this.inputValue, this.categorieClicked);
+    this.getEntreprises();
+    this.getServices();
   }
 
   // en-dessous: pour l'animation de la carte

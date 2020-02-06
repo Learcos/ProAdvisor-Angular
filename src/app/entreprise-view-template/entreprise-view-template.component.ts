@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Entreprise } from '../entreprise';
 import { EntrepriseService } from '../entreprise.service';
+import { EntrepriseApi } from '../entrepriseApi';
 
 @Component({
   selector: 'app-entreprise-view-template',
@@ -14,7 +15,7 @@ export class EntrepriseViewTemplateComponent implements OnInit {
   *        utiliser un *ngStyle plutôt que la méthode des tableaux
   */
 
-  @Input() entreprise: Entreprise;
+  @Input() entreprise: EntrepriseApi;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
 
@@ -24,7 +25,7 @@ export class EntrepriseViewTemplateComponent implements OnInit {
 
   constructor(private entrepriseService: EntrepriseService) { }
 
-  storeEntreprise(entreprise: Entreprise){
+  storeEntreprise(entreprise: EntrepriseApi){
     this.entrepriseService.storeEntrepriseClique(entreprise);
   }
 
@@ -33,8 +34,8 @@ export class EntrepriseViewTemplateComponent implements OnInit {
      *  Pour boucler avec *ngFor dans le template (.html) sans avoir un objet sur lequel on peut boucler:
      *  déclarer un tableau "fake" qui ne contient rien, juste le nombre d'éléments nécessaires
      */
-    this.yellowStarDisplayer = new Array(Math.floor(this.entreprise.note));
-    this.greyStarDisplayer = new Array(Math.floor(5 - this.entreprise.note))
+    this.yellowStarDisplayer = new Array(Math.floor(4));
+    this.greyStarDisplayer = new Array(Math.floor(1))
   }
 
 }

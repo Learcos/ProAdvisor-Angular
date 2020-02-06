@@ -9,8 +9,8 @@ import { Adresse } from './adresse';
 @Injectable({
   providedIn: 'root',
 })
-export class InMemoryDataService implements InMemoryDbService {
-  createDb() {
+export class InMemoryDataService {
+  /*createDb() {
     const categories: Categorie[] = [
       { id: 1, name: 'Peinture' },
       { id: 2, name: 'Architecte' },
@@ -148,5 +148,5 @@ export class InMemoryDataService implements InMemoryDbService {
   // id + 1.
   genId<T extends Categorie | Entreprise | Commentaire>(myTable: T[]): number {
     return myTable.length > 0 ? Math.max(...myTable.map(t => t.id)) + 1 : 11;
-  }
+  }*/
 }

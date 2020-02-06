@@ -3,6 +3,8 @@ import { Entreprise } from '../entreprise';
 import { EntrepriseService } from '../entreprise.service';
 import { Commentaire } from '../commentaire';
 import { CommentaireService } from '../commentaire.service';
+import { EntrepriseApi } from '../entrepriseApi';
+import { CommentairesApi } from '../commentaireApi';
 
 @Component({
   selector: 'app-entreprise-detail',
@@ -11,16 +13,16 @@ import { CommentaireService } from '../commentaire.service';
 })
 export class EntrepriseDetailComponent implements OnInit {
 
-  entreprise: Entreprise;
-  commentaires: Commentaire[];
+  entreprise: EntrepriseApi;
+  commentaires: CommentairesApi[];
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
 
   constructor(private entrepriseService: EntrepriseService, private commentaireService: CommentaireService) { }
 
-  getCommentairesParEntreprise(entreprise: Entreprise) {
-    this.commentaireService.getCommentairesParEntreprise(entreprise)
+  getCommentaires(entreprise: EntrepriseApi) {
+    this.commentaireService.getCommentaires(entreprise)
       .subscribe(commentaires => {
         this.commentaires = commentaires;
         this.readyToDisplay = true;
@@ -44,9 +46,9 @@ export class EntrepriseDetailComponent implements OnInit {
   ngOnInit() {
     this.storeEntrepriseCliquee();
     this.entreprise = JSON.parse(localStorage.getItem('entreprise'));
-    this.yellowStarDisplayer = new Array(Math.floor(this.entreprise.note));
-    this.greyStarDisplayer = new Array(Math.floor(5 - this.entreprise.note))
-    this.getCommentairesParEntreprise(this.entreprise);
+    this.yellowStarDisplayer = new Array(Math.floor(4));
+    this.greyStarDisplayer = new Array(Math.floor(1))
+    this.getCommentaires(this.entreprise);
   }
 
   ngOnDestroy(){

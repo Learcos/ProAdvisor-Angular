@@ -1,23 +1,27 @@
 
 import { Component, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Entreprise } from '../entreprise';
+import { EntrepriseApi } from '../entrepriseApi';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit {
-  @Input() entreprises: Entreprise[];
+
+  @Input() entreprises: EntrepriseApi[];
+  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
+  
   title = 'angular-gmap';
   geocoder: any;
-  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
   lat = 48.5129;
   lng = 2.1740;
   coordinates = new google.maps.LatLng(this.lat, this.lng);
+
   mapOptions: google.maps.MapOptions = {
-   center: this.coordinates,
-   zoom: 6
+    center: this.coordinates,
+    zoom: 6
   };
 
   marker = new google.maps.Marker({
@@ -32,17 +36,17 @@ export class MapComponent implements AfterViewInit {
 
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement,
-    this.mapOptions);
-    //this.createMarker(this.coordinates);
-    this.entreprises.forEach(entreprise => {
+      this.mapOptions);
+    this.createMarker(this.coordinates);
+    /*this.entreprises.forEach(entreprise => {
       this.lat = entreprise.adresse.lat;
       this.lng = entreprise.adresse.lng;
       this.coordinates = new google.maps.LatLng(this.lat, this.lng);
       this.createMarker(this.coordinates);
-    });
+    });*/
   }
 
-  createMarker(coord){
+  createMarker(coord) {
     this.marker = new google.maps.Marker({
       position: this.coordinates,
       map: this.map,
@@ -73,4 +77,4 @@ export class MapComponent implements AfterViewInit {
       }
     })
   }*/
- }
+}

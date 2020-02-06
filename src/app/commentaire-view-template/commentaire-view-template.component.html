@@ -1,12 +1,12 @@
 <div class="globalContainer">
     <div class="imageEtInfos">
         <div class="image">
-            <img *ngIf="objectEstValide(commentaire.auteur)" class="logo" src={{commentaire.auteur.avatar}} />
-            <img *ngIf="!(objectEstValide(commentaire.auteur))" class="logo" src='../../assets/person-logo.jpg' />
+            <!--<img *ngIf="objectEstValide(commentaire.auteur)" class="logo" src={{commentaire.auteur.avatar}} />-->
+            <img class="logo" src='../../assets/person-logo.jpg' />
         </div>
         <div class="infos">
             <div class="nom">
-                <span *ngIf="objectEstValide(commentaire.auteur)">{{commentaire.auteur.pseudo}}</span>
+                <span *ngIf="objectEstValide(commentaire.auteur)">{{commentaire.auteur}}</span>
                 <span *ngIf="!(objectEstValide(commentaire.auteur))">anonyme</span>
             </div>
             <div class="etoiles">
@@ -21,11 +21,11 @@
                 </span>
             </div>
             <div class="text">
-                {{commentaire.text}}
+                {{commentaire.commentaire}}
             </div>
         </div>
     </div>
-    <div *ngIf="objectEstValide(commentaire.AFNOR) && commentaire.AFNOR" class="AFNOR">
+    <div *ngIf="objectEstValide(commentaire.respecteAfnor) && commentaire.respecteAfnor" class="AFNOR">
         <img src="../../assets/check-logo.png">
     </div>
 </div>
