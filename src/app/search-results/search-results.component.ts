@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EntrepriseApi } from '../entrepriseApi';
 import { ServiceApi } from '../serviceApi';
 import { ServiceApiService } from '../service-api.service';
+import { ParamsRechercheService } from '../params-recherche.service';
 
 @Component({
   selector: 'app-search-results',
@@ -24,27 +25,37 @@ import { ServiceApiService } from '../service-api.service';
 
 export class SearchResultsComponent implements OnInit {
 
-  constructor(private entrepriseService: EntrepriseService, private serviceService: ServiceApiService, private route: ActivatedRoute) { }
+  constructor(private entrepriseService: EntrepriseService, private serviceService: ServiceApiService, private route: ActivatedRoute, private paramsService: ParamsRechercheService) { }
 
   categorieClicked: string;
   inputValue: string;
+  ville: string;
   entreprises: EntrepriseApi[];
   entreprisesBis: EntrepriseApi[];
   topEntreprises: EntrepriseApi[];
-
   services: ServiceApi[];
 
 
-  getEntreprises(): void {
-    this.entrepriseService.getEntreprises()
-      .subscribe(entreprises => {
-        this.entreprises = entreprises;
-        this.entreprisesBis = entreprises;
-        //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
-      });
+  getEntreprises(ville?: string): void {
+    if (this.stringValide(ville)) {
+      this.entrepriseService.getEntreprisesParVille(ville)
+        .subscribe(entreprises => {
+          this.entreprises = entreprises;
+          this.entreprisesBis = entreprises;
+          //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
+        });
+    }
+    else {
+      this.entrepriseService.getEntreprises()
+        .subscribe(entreprises => {
+          this.entreprises = entreprises;
+          this.entreprisesBis = entreprises;
+          //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
+        });
+    }
   }
 
-  getServices(): void{
+  getServices(): void {
     this.serviceService.getServices()
       .subscribe(services => {
         this.services = services;
@@ -55,15 +66,19 @@ export class SearchResultsComponent implements OnInit {
     return tab !== undefined && tab != null && tab !== [];
   }
 
-  countNumberOfResults(){
+  countNumberOfResults() {
     let res = 0;
-    if(this.entreprises){
+    if (this.entreprises) {
       res += this.entreprises.length;
     }
-    if(this.services){
+    if (this.services) {
       res += this.services.length;
     }
     return res;
+  }
+
+  stringValide(chaine: string): boolean {
+    return chaine != null && chaine != undefined && chaine != "";
   }
 
 
@@ -80,9 +95,13 @@ export class SearchResultsComponent implements OnInit {
   // les entreprises sont récupérées juste après la création du composant avec ngOnInit()
   ngOnInit() {
     this.inputValue = this.route.snapshot.paramMap.get("name");
+    console.log(this.inputValue);
     this.categorieClicked = this.route.snapshot.paramMap.get("categorie");
-    this.getEntreprises();
+    this.ville = this.paramsService.retrieveVille();
+    console.log(this.ville);
+    this.getEntreprises(this.ville);
     this.getServices();
+    this.paramsService.resetParams();
   }
 
   // en-dessous: pour l'animation de la carte

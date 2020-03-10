@@ -34,6 +34,9 @@
 
 <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
 
+<mat-checkbox [(ngModel)]="AFNOR" (click)="AFNOR_Change($event)">AFNOR</mat-checkbox>
+<mat-checkbox [(ngModel)]="NonAFNOR" (click)="NonAFNOR_Change($event)">Non AFNOR</mat-checkbox>
+
 <div class="services">
     <span>
         <h2>Services proposés:</h2>
@@ -53,12 +56,12 @@
 </div>
 
 <div class="commentairesContainer">
-    <div *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay">
-        <div *ngFor="let commentaire of commentaires" class="commentaires">
+    <div *ngIf="commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
+        <div *ngFor="let commentaire of commentairesFiltres" class="commentaires">
             <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
         </div>
     </div>
-    <div *ngIf="!commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+    <div *ngIf="!commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
         <h1>No comments</h1>
     </div>
 </div>

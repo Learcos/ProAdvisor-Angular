@@ -9,7 +9,7 @@ import { ServiceDetailComponent } from './service-detail/service-detail.componen
 const routes: Routes = [
   { path: 'accueil', component: PageAccueilComponent },
   { path: 'entreprises', component: SearchResultsComponent},
-  { path: 'entreprises/:nom', component: EntrepriseDetailComponent, data: {entreprise: 'entreprise'}},
+  { path: 'entreprises/:siret', component: EntrepriseDetailComponent, data: {entreprise: 'entreprise'}},
   { path: 'services/:urlService', component: ServiceDetailComponent, data: {service: 'service'}},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];

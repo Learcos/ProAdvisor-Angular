@@ -4,22 +4,51 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Entreprise } from './entreprise';
 import { EntrepriseApi } from './entrepriseApi';
+import { ParamsRechercheService } from './params-recherche.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrepriseService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private paramsService: ParamsRechercheService) { }
 
   private entreprisesUrl = 'https://api.r-pro-advisor.gq/Entreprise';  // URL to web api
   private entrepriseClique: EntrepriseApi;
+  private siret: string;
+  private ville: string;
 
 
   //retourne toutes les entreprises
   getEntreprises(): Observable<EntrepriseApi[]> {
-    return this.http.get<EntrepriseApi[]>(this.entreprisesUrl)
-          .pipe(
+    let params: string;
+    params = this.paramsService.remplitParams();
+    if(params != null && params != undefined){
+      console.log("params:", params);
+      return this.http.get<EntrepriseApi[]>(this.entreprisesUrl + params)
+      .pipe(
+        catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
+      );
+    }
+    else{
+      return this.http.get<EntrepriseApi[]>(this.entreprisesUrl)
+      .pipe(
+        catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
+      );
+    }
+    
+  }
+
+  getEntreprisesParSiret(siret: string): Observable<EntrepriseApi[]> {
+    return this.http.get<EntrepriseApi[]>(this.entreprisesUrl + siret)
+      .pipe(
+        catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
+      );
+  }
+
+  getEntreprisesParVille(ville: string): Observable<EntrepriseApi[]> {
+    return this.http.get<EntrepriseApi[]>(this.entreprisesUrl + '?Ville=' + ville.toUpperCase())
+      .pipe(
         catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
       );
   }
@@ -49,7 +78,7 @@ export class EntrepriseService {
     if (this.isStringValide(categorieName)) {
       return this.getEntreprisesParCategories(categorieName);
     }
-    else{ //if (this.isStringValide(inputValue)) 
+    else { //if (this.isStringValide(inputValue)) 
       return this.getEntreprisesContenantChain(inputValue);
     }
     //else {
@@ -70,7 +99,7 @@ export class EntrepriseService {
   *  ci-dessous: méthodes utilisaires employées dans les get au-dessus
   */
 
-  filtreEntreprisesContenantChain(entreprises: Entreprise[], chain: string){
+  filtreEntreprisesContenantChain(entreprises: Entreprise[], chain: string) {
     return entreprises.filter(entreprise => this.entrepriseContientChain(entreprise, chain));
   }
 

@@ -3,5 +3,26 @@
         {{ title }}
     </h1>
 </div>
-<app-search-bar></app-search-bar>
-<app-categorie></app-categorie>
+<div class="search-result center">
+    <input #searchBox id="search-box" (input)="updateValue(searchBox.value)" />
+    <a [routerLink]="['/entreprises']" class="search"> Search </a>
+</div>
+<ul class="categories">
+    <li *ngFor="let categorie of categories">
+        <a [routerLink]="['/entreprises', {categorie: categorie.name}]" class="badge">{{categorie.name}}</a>
+    </li>
+</ul>
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Ville</mat-label>
+        <input (keyup)="storeVille($event)" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Siren entreprise</mat-label>
+        <input (keyup)="storeSiren($event)" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Siret entreprise</mat-label>
+        <input (keyup)="storeSiret($event)" matInput>
+    </mat-form-field>
+</form>
