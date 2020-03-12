@@ -4,21 +4,76 @@
     <app-map [entreprises]="entreprises"></app-map>
 </div>
 
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<section>
+	<div class="container tb-padding">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="need-help text-center">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					<h5>Need Help?</h5>
+					<h4>+45-455-453</h4>
+					<p><span>Monday to Friday 9.00am - 7.30pm</span></p>
+				</div>
+			</div>
 
-<div class="entreprises">
-    <h1>Entreprises</h1>
-    <div *ngIf="entreprises">
-        <div class="results" *ngFor="let entreprise of entreprises">
-            <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
+
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<div class="search-box">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<select>
+							<option>Sort By Price</option>
+							<option>Sort By Price</option>
+							<option>Sort By Price</option>
+						</select>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<select>
+							<option>Sort By Ranking</option>
+							<option>Sort By Ranking</option>
+							<option>Sort By Ranking</option>
+						</select>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<i class="fa fa-list" aria-hidden="true"></i>
+							<i class="fa fa-th" aria-hidden="true"></i>
+						</div>
+				</div>
+      </div>
+
+      <div class="entreprises">
+        <h1>Entreprises</h1>
+        <div *ngIf="entreprises">
+            <div class="results" *ngFor="let entreprise of entreprises">
+                <app-entreprise-view-template [entreprise]="entreprise"></app-entreprise-view-template>
+            </div>
+        </div>
+        <h1>Services</h1>
+        <div *ngIf="services">
+            <div class="results" *ngFor="let service of services">
+                <app-service-view-template [service]="service"></app-service-view-template>
+            </div>
         </div>
     </div>
-    <h1>Services</h1>
-    <div *ngIf="services">
-        <div class="results" *ngFor="let service of services">
-            <app-service-view-template [service]="service"></app-service-view-template>
-        </div>
-    </div>
-</div>
+  </div>
+
+
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">5</a></li>
+    <li class="page-item"><a class="page-link" href="#">6</a></li>
+    <li class="page-item"><a class="page-link" href="#">7</a></li>
+    <li class="page-item"><a class="page-link" href="#">8</a></li>
+    <li class="page-item"><a class="page-link" href="#">9</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+
+
 
 <div class="rectangle">
     <div class="nbResults">
@@ -27,7 +82,7 @@
             {{countNumberOfResults()}}
         </span>
     </div>
-    <!-- 
+    <!--
     <div class="top-companies">
         <div class="title">Top entreprises:</div>
         <div *ngIf="entreprises">1. {{topEntreprises[0].nom}}</div>
@@ -36,3 +91,6 @@
     </div>
 -->
 </div>
+
+
+

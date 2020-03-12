@@ -1,33 +1,38 @@
 <a (click)="storeEntreprise(entreprise)" routerLink="/entreprises/{{entreprise.nom}}" class="globalContainer">
-    <div class="imageEtInfos">
-        <div class="image">
-            <!--<img class="logo" src={{entreprise.logo}} />-->
-            <img class="logo" src='../../assets/logo-entreprise.png' />
-        </div>
-        <div class="infos">
-            <div class="nom">
-                {{entreprise.nom}}
-            </div>
-            <!--<div class="categories">
-                <div class="categorie" *ngFor="let service of entreprise.services">
-                    {{service}}
-                </div>
-            </div>
-        -->
-            <div class="etoiles">
-                <span *ngFor="let star of yellowStarDisplayer">
-                    <img class="etoile" src="../../assets/Etoile_jaune.png" />
-                </span>
-                <!--<span *ngIf="!isInteger(entreprise.note)">
-                    <img class="etoile" src="../../assets/Etoile_demi.PNG" />
-                </span>-->
-                <span *ngFor="let star of greyStarDisplayer">
-                    <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
-                </span>
-            </div>
-        </div>
+  <div class="row small-padding-bg">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="image-size"><img class="logo" src='../../assets/logo-entreprise.png' /></div>
     </div>
-    <div class="caseBlanche">
-        <img class="caseBlancheImage" src="../../assets/case.png" />
+    <div class="etoiles">
+      <span *ngFor="let star of yellowStarDisplayer">
+          <img class="etoile" src="../../assets/Etoile_jaune.png" />
+      </span>
+      <span *ngFor="let star of greyStarDisplayer">
+          <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
+      </span>
+  </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 customs-p">
+      <h3>{{entreprise.nom}}</h3>
+      <p><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><span>123456 avis</span></p>
+      <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span>TEL:</p>
+      <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>Adresse</p>
     </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <a href="about.html" class="btn_orange medium customs-margin">Read more</a>
+    </div>
+  </div>
 </a>
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-----------------------------------Section first--------------------------------------->
+
+
+
+
+
+
