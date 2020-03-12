@@ -5,24 +5,51 @@
 </div>
 <div class="search-result center">
     <input #searchBox id="search-box" (input)="updateValue(searchBox.value)" />
-    <a [routerLink]="['/entreprises']" class="search"> Search </a>
 </div>
-<ul class="categories">
-    <li *ngFor="let categorie of categories">
-        <a [routerLink]="['/entreprises', {categorie: categorie.name}]" class="badge">{{categorie.name}}</a>
-    </li>
-</ul>
-<form class="example-form">
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheEntreprise} ">
+    <div [ngClass]="{'title': rechercheEntreprise}">Recherche entreprise par Siret</div>
     <mat-form-field class="example-full-width">
-        <mat-label>Ville</mat-label>
-        <input (keyup)="storeVille($event)" matInput>
+        <mat-label>Entrez le num de Siret de l'entreprise recherchée</mat-label>
+        <input (keyup)="storeSiret($event)" (focus)="majRechercheEntreprise()" matInput>
     </mat-form-field>
+    <a mat-raised-button [routerLink]="['/entreprises/', siret]"
+        [ngClass]="{'small-size-button': !rechercheEntreprise}">Search</a>
+</form>
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheService} ">
+    <div [ngClass]="{'title': rechercheService}">Recherche service par URL</div>
     <mat-form-field class="example-full-width">
-        <mat-label>Siren entreprise</mat-label>
-        <input (keyup)="storeSiren($event)" matInput>
+        <mat-label>Entrez l'URL du service recherché</mat-label>
+        <input (keyup)="storeVille($event)" (focus)="majRechercheService()" matInput>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Siret entreprise</mat-label>
-        <input (keyup)="storeSiret($event)" matInput>
-    </mat-form-field>
+    <a mat-raised-button [routerLink]="['/services/', url]"
+        [ngClass]="{'small-size-button': !rechercheService} ">Search</a>
+</form>
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheAvancee}" [formGroup]="options">
+    <div [ngClass]="{'title': rechercheAvancee}">Recherche avancée</div>
+    <div class="decalage">
+        <div [ngClass]="{'sous-titre': rechercheAvancee}">Pour les entreprises:</div>
+        <div class="decalage">
+            <mat-form-field class="example-full-width">
+                <mat-label>Ville</mat-label>
+                <input (keyup)="storeVille($event)" (focus)="majRechercheAvancee()" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Siren entreprise</mat-label>
+                <input (keyup)="storeSiren($event)" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Zone d'intervention</mat-label>
+                <input (keyup)="storeSiren($event)" matInput>
+            </mat-form-field>
+            <mat-checkbox [formControl]="hideRequiredControl" class="changeColor">N'afficher que les résultats
+                présentant des prestations gratuites (devis...)</mat-checkbox>
+        </div>
+    </div>
+    <div class="decalage">
+        <div [ngClass]="{'sous-titre': rechercheAvancee}">Pour les services:</div>
+    </div>
+    <a mat-raised-button [routerLink]="['/entreprises']" [ngClass]="{'small-size-button': !rechercheAvancee}">Search</a>
 </form>

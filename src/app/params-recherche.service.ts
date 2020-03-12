@@ -8,6 +8,7 @@ export class ParamsRechercheService {
   private siret: number;
   private siren: number;
   private ville: string;
+  private url: string;
 
   storeVille(ville: string) {
     this.ville = ville;
@@ -33,6 +34,14 @@ export class ParamsRechercheService {
     return this.siret;
   }
 
+  storeUrl(url: string) {
+    this.url = url;
+  }
+
+  retrieveUrl() {
+    return this.url;
+  }
+
   remplitParams(): string {
     let params: string;
     if (this.ville != null && this.ville != undefined && this.ville != "") {
@@ -46,6 +55,7 @@ export class ParamsRechercheService {
     this.siren = null;
     this.siret = null;
     this.ville = null;
+    this.url = null;
   }
 
   constructor() { }

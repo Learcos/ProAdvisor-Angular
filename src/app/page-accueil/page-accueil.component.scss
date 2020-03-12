@@ -69,8 +69,45 @@ ul.search-result {
   max-width: 500px;
   width: 100%;
   margin: auto;
+  padding-top: 5%;
 }
 
 .example-full-width {
   width: 100%;
+}
+
+.title{
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.sous-titre{
+  font-size:large;
+  padding-top: 20px;
+}
+
+.clicked{
+  font-size: small !important;
+  font-weight: normal !important;
+  color: lightgray;
+}
+
+.mat-raised-button{
+  float: right; 
+}
+
+.small-size-button{
+  font-size: x-small;
+}
+
+.decalage{
+  padding-left: 10px;
+}
+
+.mat-form-field-infix{
+  width: 538px;
+}
+
+.changeColor{
+  color: grey;
 }

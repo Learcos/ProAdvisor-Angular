@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categorie } from '../categorie';
 import { CategorieService } from '../categorie.service';
 import { ParamsRechercheService } from '../params-recherche.service';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-page-accueil',
@@ -13,42 +14,63 @@ export class PageAccueilComponent implements OnInit {
   title = "R-Pro-Advisor";
   inputValue: string = "lol";
 
+  rechercheService = true;
+  rechercheEntreprise = true;
+  rechercheAvancee = true;
+
+  siret: number;
+  url: string;
+  gratuit: boolean = false;
+
+  options: FormGroup;
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+
+  constructor(private paramsService: ParamsRechercheService, private fb: FormBuilder) {
+    this.options = fb.group({
+      hideRequired: this.hideRequiredControl,
+      floatLabel: this.floatLabelControl,
+    });
+   }
+
   updateValue(value: string) {
     this.inputValue = value.trim();
   }
 
-  categories: Categorie[] = [
-    { id: 1, name: 'Peinture' },
-    { id: 2, name: 'Architecte' },
-    { id: 3, name: 'Chauffagiste' },
-    { id: 4, name: 'Entrepreneur en toiture' },
-    { id: 5, name: 'Menuisier' },
-    { id: 6, name: 'Auto-moto' },
-    { id: 7, name: 'Jardinage' },
-    { id: 8, name: 'Panneaux solaires' },
-    { id: 9, name: 'Isolation' },
-    { id: 10, name: 'Aménagement intérieur' },
-    { id: 11, name: 'Eolien' },
-    { id: 12, name: 'Energie' }
-  ];
-
-  getCategories(): void {
-    this.categorieService.getCategories()
-      .subscribe(categories => this.categories = categories);
-  }
-
-  constructor(private categorieService: CategorieService, private paramsService: ParamsRechercheService) { }
-
-  storeVille(ville: any){
+  storeVille(ville: any) {
     this.paramsService.storeVille(ville.target.value);
   }
 
-  storeSiren(siren: any){
+  storeSiren(siren: any) {
     this.paramsService.storeSiren(siren.target.value);
   }
 
-  storeSiret(siret: any){
+  storeSiret(siret: any) {
     this.paramsService.storeSiret(siret.target.value);
+    this.siret = siret.target.value;
+  }
+
+  storeUrl(url: any) {
+    this.paramsService.storeUrl(url.target.value);
+    this.url = url.target.value;
+  }
+
+  majRechercheAvancee() {
+    this.rechercheAvancee = true;
+    this.rechercheEntreprise = false;
+    this.rechercheService = false;
+  }
+
+  majRechercheEntreprise() {
+    this.rechercheAvancee = false;
+    this.rechercheEntreprise = true;
+    this.rechercheService = false;
+  }
+
+  majRechercheService() {
+    this.rechercheAvancee = false;
+    this.rechercheEntreprise = false;
+    this.rechercheService = true;
   }
 
   ngOnInit() {

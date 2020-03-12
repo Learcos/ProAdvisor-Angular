@@ -17,10 +17,11 @@ import { MapComponent } from './map/map.component';
 import { ServiceViewTemplateComponent } from './service-view-template/service-view-template.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 
-import { MatInputModule, MatCheckboxModule, MatCardModule, MatRadioModule} from '@angular/material';
+import { MatInputModule, MatCheckboxModule, MatCardModule, MatRadioModule, MatSelectModule} from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAjoutComponent } from './form-ajout/form-ajout.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,10 @@ import { FormAjoutComponent } from './form-ajout/form-ajout.component';
     MatCheckboxModule,
     MatCardModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule,
+    MatSelectModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,7 +23,6 @@ export class ServiceDetailComponent implements OnInit {
   constructor(private servicesService: ServiceApiService, private commentaireService: CommentaireService) { }
 
   getCommentaires(service: ServiceApi) {
-    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR);
     this.commentaireService.getCommentaires(null, service)
       .subscribe(commentaires => {
         this.commentaires = commentaires;
@@ -46,59 +45,47 @@ export class ServiceDetailComponent implements OnInit {
     return Math.floor(number) == number;
   }
 
-  filtreCommentairesAFNOROuNon(AFNOR: boolean) {
-
-  }
-
-  AFNOR_Change(event: any) {
+  AFNOR_Change() {
     this.commentairesFiltres = this.commentaires;
-    switch (event.target.value) {
-      case true: if (this.NonAFNOR) {
-        
+    if (this.AFNOR) {
+      if (!this.NonAFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+    }
+    else {
+      if (this.NonAFNOR) {
+        console.log(this.commentaires[0].respecteAfnor);
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+      else {
+        console.log("AFNOR false, NonAFNOR false");
+        this.commentairesFiltres = null;
       }
     }
   }
 
-  changeCommentsAFNOR() {
-    this.commentairesFiltres = this.commentaires.filter(
-      commentaire => commentaire.respecteAfnor == this.AFNOR
-    );
-    if (this.NonAFNOR) {
-      this.commentairesFiltres = this.commentaires.filter(
-        commentaire => commentaire.respecteAfnor == this.NonAFNOR
-      );
-    }
-  }
-
-  changeCommentsNonAFNOR() {
-    this.commentairesFiltres = this.commentaires.filter(
-      commentaire => commentaire.respecteAfnor == this.NonAFNOR
-    );
-    if (!this.AFNOR) {
-      this.commentairesFiltres = this.commentaires.filter(
-        commentaire => commentaire.respecteAfnor == this.AFNOR
-      );
-    }
-  }
-
-  filtreCommentaires() {
+  NonAFNOR_Change() {
     this.commentairesFiltres = this.commentaires;
-    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR);
-    switch (this.AFNOR) {
-      case true:
-        if (!this.NonAFNOR) {
-          this.commentairesFiltres = this.commentaires.filter(
-            commentaire => commentaire.respecteAfnor == true
-          );
-        }
-      case false:
-        switch (this.NonAFNOR) {
-          case true:
-            this.commentairesFiltres = this.commentaires.filter(
-              commentaire => commentaire.respecteAfnor == false
-            );
-          case false: this.commentairesFiltres = null;
-        }
+    if (!this.NonAFNOR) {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+    }
+    else {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+      else {
+        this.commentairesFiltres = null;
+      }
     }
   }
 
