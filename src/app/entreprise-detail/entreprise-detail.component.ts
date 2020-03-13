@@ -18,6 +18,8 @@ export class EntrepriseDetailComponent implements OnInit {
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
+  AFNOR: boolean = true;
+  NonAFNOR: boolean = true;
 
   constructor(private entrepriseService: EntrepriseService, private commentaireService: CommentaireService) { }
 
@@ -29,18 +31,32 @@ export class EntrepriseDetailComponent implements OnInit {
       })
   }
 
-  commentairesValidesPourAffichage(commentaires: Commentaire[]){
+  commentairesValidesPourAffichage(commentaires: Commentaire[]) {
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
-  storeEntrepriseCliquee(){
-    if(!localStorage.getItem('entreprise')){
+  storeEntrepriseCliquee() {
+    if (!localStorage.getItem('entreprise')) {
       localStorage.setItem('entreprise', JSON.stringify(this.entrepriseService.retrieveEntrepriseClique()));
     }
   }
 
-  isInteger(number: number): boolean{
+  isInteger(number: number): boolean {
     return Math.floor(number) == number;
+  }
+
+  filtreCommentairesAFNOROuNon(AFNOR: boolean) {
+    this.commentaires.filter(
+      commentaire => commentaire.respecteAfnor == AFNOR
+    );
+  }
+
+  changeCommentsAFNOR(){
+    this.filtreCommentairesAFNOROuNon(true);
+  }
+
+  changeCommentsNonAFNOR(){
+    this.filtreCommentairesAFNOROuNon(false);
   }
 
   ngOnInit() {
@@ -51,7 +67,7 @@ export class EntrepriseDetailComponent implements OnInit {
     this.getCommentaires(this.entreprise);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     localStorage.clear();
   }
 

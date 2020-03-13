@@ -1,7 +1,38 @@
+<<<<<<< HEAD
 <a (click)="storeEntreprise(entreprise)" routerLink="/entreprises/{{entreprise.nom}}" class="globalContainer">
   <div class="row small-padding-bg">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <div class="image-size"><img class="logo" src='../../assets/logo-entreprise.png' /></div>
+=======
+<a (click)="storeEntreprise(entreprise)" routerLink="/entreprises/{{entreprise.siret}}" class="globalContainer">
+    <div class="imageEtInfos">
+        <div class="image">
+            <!--<img class="logo" src={{entreprise.logo}} />-->
+            <img class="logo" src='../../assets/logo-entreprise.png' />
+        </div>
+        <div class="infos">
+            <div class="nom">
+                {{entreprise.nom}}
+            </div>
+            <!--<div class="categories">
+                <div class="categorie" *ngFor="let service of entreprise.services">
+                    {{service}}
+                </div>
+            </div>
+        -->
+            <div class="etoiles">
+                <span *ngFor="let star of yellowStarDisplayer">
+                    <img class="etoile" src="../../assets/Etoile_jaune.png" />
+                </span>
+                <!--<span *ngIf="!isInteger(entreprise.note)">
+                    <img class="etoile" src="../../assets/Etoile_demi.PNG" />
+                </span>-->
+                <span *ngFor="let star of greyStarDisplayer">
+                    <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
+                </span>
+            </div>
+        </div>
+>>>>>>> 702cd99d7fb15620a9151e6453485b548daa72b4
     </div>
     <div class="etoiles">
       <span *ngFor="let star of yellowStarDisplayer">

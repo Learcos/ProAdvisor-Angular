@@ -13,9 +13,12 @@ export class ServiceDetailComponent implements OnInit {
 
   service: ServiceApi;
   commentaires: CommentairesApi[];
+  commentairesFiltres: CommentairesApi[];
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
+  AFNOR: boolean = true;
+  NonAFNOR: boolean = true;
 
   constructor(private servicesService: ServiceApiService, private commentaireService: CommentaireService) { }
 
@@ -24,21 +27,66 @@ export class ServiceDetailComponent implements OnInit {
       .subscribe(commentaires => {
         this.commentaires = commentaires;
         this.readyToDisplay = true;
+        this.commentairesFiltres = this.commentaires;
       })
   }
 
-  commentairesValidesPourAffichage(commentaires: CommentairesApi[]){
+  commentairesValidesPourAffichage(commentaires: CommentairesApi[]) {
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
-  storeServiceClique(){
-    if(!localStorage.getItem('service')){
+  storeServiceClique() {
+    if (!localStorage.getItem('service')) {
       localStorage.setItem('service', JSON.stringify(this.servicesService.retrieveServiceClique()));
     }
   }
 
-  isInteger(number: number): boolean{
+  isInteger(number: number): boolean {
     return Math.floor(number) == number;
+  }
+
+  AFNOR_Change() {
+    this.commentairesFiltres = this.commentaires;
+    if (this.AFNOR) {
+      if (!this.NonAFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+    }
+    else {
+      if (this.NonAFNOR) {
+        console.log(this.commentaires[0].respecteAfnor);
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+      else {
+        console.log("AFNOR false, NonAFNOR false");
+        this.commentairesFiltres = null;
+      }
+    }
+  }
+
+  NonAFNOR_Change() {
+    this.commentairesFiltres = this.commentaires;
+    if (!this.NonAFNOR) {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+    }
+    else {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+      else {
+        this.commentairesFiltres = null;
+      }
+    }
   }
 
   ngOnInit() {
@@ -49,7 +97,7 @@ export class ServiceDetailComponent implements OnInit {
     this.getCommentaires(this.service);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     localStorage.clear();
   }
 

@@ -34,6 +34,9 @@
 
 <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
 
+<mat-radio-button [(ngModel)]="AFNOR" (click)="changeCommentsAFNOR()">AFNOR</mat-radio-button>
+<mat-radio-button [(ngModel)]="NonAFNOR" (click)="changeCommentsNonAFNOR()">Non AFNOR</mat-radio-button>
+
 <div class="services">
     <span>
         <h2>Services proposés:</h2>
