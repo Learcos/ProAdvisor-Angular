@@ -1,0 +1,164 @@
+
+
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+------ Include the above in your HEAD tag ----------
+
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<body class="profile-page sidebar-collapse">
+  -- Navbar --
+
+  -- End Navbar --
+  <div class="wrapper">
+    <div class="page-header clear-filter" filter-color="orange">
+      <div class="page-header-image" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1476984251899-8d7fdfc5c92c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3700&q=80');">
+      </div>
+      <div class="container">
+        <div class="photo-container">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRzpZGfeGpYCBiwxxWqV_Qh19i9nRM2oUHA5Tg2QlfMkjTE-vE5" alt="">
+        </div>
+        <h3 class="title">{{title}}</h3>
+        <div class="content">
+          <div class="social-description">
+            <h2>400</h2>
+            <p>Entreprises</p>
+          </div>
+          <div class="social-description">
+            <h2>20</h2>
+            <p>Sources AFNOR</p>
+          </div>
+          <div class="social-description">
+            <h2>120000</h2>
+            <p>Clients annuels</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <h3 class="title">About us</h3>
+        <h5 class="description">Ce site web a pour but de vous aider dans le choix de l'entreprise à choisir pour vos prochains travaux.</h5>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <h4 class="title text-center">Nos références</h4>
+            <div class="nav-align-center">
+              <ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#profile" role="tablist">
+                    Services
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#home" role="tablist">
+                    Entreprises
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#messages" role="tablist">
+                   Auto-entrepreneur
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          -- Tab panes --
+        </div>
+      </div>
+    </div>
+    <footer class="footer footer-default">
+      <div class="container">
+        <nav>
+          <ul>
+            <li>
+              <a href="https://normalisation.afnor.org/normes-definition/">
+                AFNOR
+              </a>
+            </li>
+            <li>
+              <a href="http://presentation.creative-tim.com">
+                à ajouter
+              </a>
+            </li>
+            <li>
+              <a href="http://blog.creative-tim.com">
+                to add
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright" id="copyright">
+            <p>Made with <a href="https://demos.creative-tim.com/now-ui-kit/index.html" target="_blank">Now UI Kit</a> by Creative Tim</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+
+
+  <app-search-bar></app-search-bar>
+</body>
+-->
+
+<div>
+    <h1 class="center">
+        {{ title }}
+    </h1>
+</div>
+<div class="search-result center">
+    <input #searchBox id="search-box" (input)="updateValue(searchBox.value)" />
+</div>
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheEntreprise} ">
+    <div [ngClass]="{'title': rechercheEntreprise}">Recherche entreprise par Siret</div>
+    <mat-form-field class="example-full-width">
+        <mat-label>Entrez le num de Siret de l'entreprise recherchée</mat-label>
+        <input (keyup)="storeSiret($event)" (focus)="majRechercheEntreprise()" matInput>
+    </mat-form-field>
+    <a mat-raised-button (click)="storeEntreprise()"
+        [ngClass]="{'small-size-button': !rechercheEntreprise}">Search</a>
+</form>
+
+<!-- [routerLink]="['/entreprises/', siret]" -->
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheService} ">
+    <div [ngClass]="{'title': rechercheService}">Recherche service par URL</div>
+    <mat-form-field class="example-full-width">
+        <mat-label>Entrez l'URL du service recherché</mat-label>
+        <input (keyup)="storeUrl($event)" (focus)="majRechercheService()" matInput>
+    </mat-form-field>
+    <a mat-raised-button (click)="storeService()"
+        [ngClass]="{'small-size-button': !rechercheService} ">Search</a>
+</form>
+
+<form class="example-form" [ngClass]="{'clicked': !rechercheAvancee}" [formGroup]="options">
+    <div [ngClass]="{'title': rechercheAvancee}">Recherche avancée</div>
+    <div class="decalage">
+        <div [ngClass]="{'sous-titre': rechercheAvancee}">Pour les entreprises:</div>
+        <div class="decalage">
+            <mat-form-field class="example-full-width">
+                <mat-label>Ville</mat-label>
+                <input (keyup)="storeVille($event)" (focus)="majRechercheAvancee()" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Siren entreprise</mat-label>
+                <input (keyup)="storeSiren($event)" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Zone d'intervention</mat-label>
+                <input (keyup)="storeSiren($event)" matInput>
+            </mat-form-field>
+            <mat-checkbox [formControl]="hideRequiredControl" class="changeColor">N'afficher que les résultats
+                présentant des prestations gratuites (devis...)</mat-checkbox>
+        </div>
+    </div>
+    <div class="decalage">
+        <div [ngClass]="{'sous-titre': rechercheAvancee}">Pour les services:</div>
+    </div>
+    <a mat-raised-button [routerLink]="['/entreprises']" [ngClass]="{'small-size-button': !rechercheAvancee}">Search</a>
+</form>

@@ -1,0 +1,69 @@
+<app-top-bar></app-top-bar>
+
+<div class="globalContainer">
+    <div class="imageEtInfos">
+        <div class="image">
+            <!--<img class="logo" src={{entreprise.logo}} />-->
+            <img class="logo" src='../../assets/logo-entreprise.png' />
+        </div>
+        <div class="infos">
+            <div class="nom">
+                {{service.urlService}}
+            </div>
+            <!--<div class="categories">
+                <div class="categorie" *ngFor="let categorie of entreprise.categories">
+                    {{categorie.name}}
+                </div>
+            </div>
+        -->
+        </div>
+    </div>
+    <div class="displayFlex">
+        <span *ngFor="let star of yellowStarDisplayer">
+            <span><img class="displayFlex" src="../../assets/Etoile_jaune.png" /></span>
+        </span>
+        <!--<span *ngIf="!isInteger(entreprise.note)">
+            <img class="etoile" src="../../assets/Etoile_demi.PNG" />
+        </span>
+    -->
+        <span *ngFor="let star of greyStarDisplayer">
+            <span><img class="displayFlex" src="../../assets/Etoile_grise.png" /></span>
+        </span>
+    </div>
+</div>
+
+<app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
+
+<div class="checkboxes">
+    <mat-checkbox [(ngModel)]="AFNOR" [ngModelOptions]="{standalone: true}" (click)="AFNOR_Change()">AFNOR</mat-checkbox>
+    <mat-checkbox [(ngModel)]="NonAFNOR" [ngModelOptions]="{standalone: true}" (click)="NonAFNOR_Change()">Non AFNOR</mat-checkbox>
+</div>
+
+<div class="services">
+    <span>
+        <h2>Services proposés:</h2>
+    </span>
+    <div *ngIf="!service.services ; else showServices">
+        Pas de services proposés connus
+    </div>
+    <ng-template #showServices>
+        <div *ngFor="let service of service.services">
+            <ul>
+                <li>
+                    {{service}}
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+</div>
+
+<div class="marginLeft">
+    <div *ngIf="commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
+        <div *ngFor="let commentaire of commentairesFiltres" class="commentaires">
+            <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
+        </div>
+    </div>
+    <div *ngIf="!commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
+        <h1>No comments</h1>
+    </div>
+</div>
