@@ -52,8 +52,6 @@
     </ng-template>
 </div>
 
-
-
 <mat-expansion-panel class="marginLeft column" *ngIf="commentairesValides(commentairesFiltres) && readyToDisplay">
     <mat-expansion-panel-header>
         <mat-panel-title>
@@ -85,15 +83,17 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Date min</mat-label>
-            <input matInput>
+            <input matInput (keyup)="storeDateMin($event)">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Date max</mat-label>
-            <input matInput>
+            <input matInput (keyup)="storeDateMax($event)">
         </mat-form-field>
     </div>
+    <a mat-raised-button (click)="filtrerCommentaires()">Filtrer</a>
+    <a mat-raised-button (click)="resetParamsComm()">Reset</a>
 </mat-expansion-panel>
 
 <div class="marginLeft">

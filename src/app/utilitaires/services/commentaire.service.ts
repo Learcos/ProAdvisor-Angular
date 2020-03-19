@@ -5,30 +5,46 @@ import { catchError, map } from 'rxjs/operators';
 import { EntrepriseApi } from '../typesAPI/entrepriseApi';
 import { ServiceApi } from '../typesAPI/serviceApi';
 import { CommentairesApi } from '../typesAPI/commentaireApi';
+import { ParamsCommentairesService } from './params-commentaires.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentaireService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private paramsCommService: ParamsCommentairesService) { }
 
   private servicesCommentairesUrl = 'https://api.r-pro-advisor.gq/Service';  // URL to web api
   private entreprisesCommentairesUrl = 'https://api.r-pro-advisor.gq/Entreprise';
 
   //Observable: utile quand les requêtes seront en HTML (asynchrones)
   getCommentaires(entreprise?: EntrepriseApi, service?: ServiceApi): Observable<CommentairesApi[]> {
-    let url: string;
-    if(entreprise !== null && entreprise !== undefined){
-      url = this.entreprisesCommentairesUrl + '/' + entreprise.siret + '/Comments';
+    let params: string, url: string;
+    params = this.paramsCommService.remplitParamsCommentaire();
+    if (params != null && params != undefined) {
+      if (entreprise !== null && entreprise !== undefined) {
+        url = this.entreprisesCommentairesUrl + '/' + entreprise.siret + '/Comments';
+      }
+      else if (service !== null && service !== undefined) {
+        url = this.servicesCommentairesUrl + '/' + service.urlService + '/Comments';
+      }
+      return this.http.get<CommentairesApi[]>(url + params)
+        .pipe(
+          catchError(this.handleError<CommentairesApi[]>('getCommentaires'))
+        );
     }
-    else if(service !== null && service !== undefined){
-      url = this.servicesCommentairesUrl + '/' + service.urlService + '/Comments';
+    else {
+      if (entreprise !== null && entreprise !== undefined) {
+        url = this.entreprisesCommentairesUrl + '/' + entreprise.siret + '/Comments';
+      }
+      else if (service !== null && service !== undefined) {
+        url = this.servicesCommentairesUrl + '/' + service.urlService + '/Comments';
+      }
+      return this.http.get<CommentairesApi[]>(url)
+        .pipe(
+          catchError(this.handleError<CommentairesApi[]>('getCommentaires'))
+        );
     }
-    return this.http.get<CommentairesApi[]>(url)
-      .pipe(
-        catchError(this.handleError<CommentairesApi[]>('getCommentaires', []))
-      );
   }
 
   /*

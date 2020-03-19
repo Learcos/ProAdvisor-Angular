@@ -3,6 +3,7 @@ import { ServiceApi } from '../../../utilitaires/typesAPI/serviceApi';
 import { CommentairesApi } from '../../../utilitaires/typesAPI/commentaireApi';
 import { ServiceApiService } from '../../../utilitaires/services/service-api.service';
 import { CommentaireService } from '../../../utilitaires/services/commentaire.service';
+import { ParamsCommentairesService } from 'src/app/utilitaires/services/params-commentaires.service';
 
 @Component({
   selector: 'app-service-detail',
@@ -22,13 +23,17 @@ export class ServiceDetailComponent implements OnInit {
   sourcesCommentaires: string[] = [];
   selectedSource: string;
 
+  moyenneComm: number;
+
   thumbLabel = true;
   noteValue: number = 1;
+
+  aFiltre: boolean = false;
 
   AFNOR_value: string = '';
   AFNOR_Model: string[] = ['Tous', 'AFNOR', 'Non AFNOR'];
 
-  constructor(private servicesService: ServiceApiService, private commentaireService: CommentaireService) { }
+  constructor(private servicesService: ServiceApiService, private commentaireService: CommentaireService, private paramsCommService: ParamsCommentairesService) { }
 
   getCommentaires(service: ServiceApi) {
     this.commentaireService.getCommentaires(null, service)
@@ -37,6 +42,9 @@ export class ServiceDetailComponent implements OnInit {
         this.readyToDisplay = true;
         this.commentairesFiltres = this.commentaires;
         this.remplitSources();
+        this.moyenneComm = this.calculeMoyenneCommentaire();
+        this.yellowStarDisplayer = new Array(this.moyenneComm);
+        this.greyStarDisplayer = new Array(5 - this.moyenneComm);
       })
   }
 
@@ -65,16 +73,63 @@ export class ServiceDetailComponent implements OnInit {
 
   remplitSources() {
     this.commentaires.forEach(commentaire => {
-      if(commentaire.source != null && commentaire.source != undefined && commentaire.source != ""){
+      if (commentaire.source != null && commentaire.source != undefined && commentaire.source != "") {
         let pasDansLeTableau: boolean = true;
-        if(this.sourcesCommentaires.length > 0){
+        if (this.sourcesCommentaires.length > 0) {
           this.sourcesCommentaires.forEach(source => {
-            if(commentaire.source = source) pasDansLeTableau = false;
+            if (commentaire.source = source) pasDansLeTableau = false;
           });
         }
-        if(pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
+        if (pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
       }
     });
+  }
+
+  storeDateMin(dateMin: any){
+    this.paramsCommService.storeDateMin(dateMin.target.value);
+  }
+
+  storeDateMax(dateMax: any){
+    this.paramsCommService.storeDateMin(dateMax.target.value);
+  }
+
+  storeAFNOR(){
+    let AFNOR: boolean = null;
+    if(this.AFNOR_value == "AFNOR"){
+      AFNOR = true;
+    }
+    if(this.AFNOR_value == "Non AFNOR"){
+      AFNOR = false;
+    }
+    this.paramsCommService.storeAFNOR(AFNOR);
+  }
+
+  filtrerCommentaires() {
+    this.storeAFNOR();
+    this.paramsCommService.storeSource(this.selectedSource);
+    this.paramsCommService.storeNote(this.noteValue);
+    this.paramsCommService.remplitParamsCommentaire();
+    console.log("AFNOR: " + this.AFNOR_value + ", note: " + this.noteValue);
+    this.getCommentaires(this.service);
+    this.aFiltre = true;
+  }
+
+  calculeMoyenneCommentaire() {
+    let moyenne: number = 0;
+    let nbComm = 0;
+    this.commentaires.forEach(commentaire => {
+      moyenne += commentaire.note;
+      nbComm++;
+    })
+    return Math.round(moyenne / nbComm);
+  }
+
+  resetParamsComm(){
+    this.paramsCommService.resetParams();
+    this.noteValue = null;
+    this.AFNOR_value = null;
+    this.selectedSource = null;
+    this.getCommentaires(this.service);
   }
 
   /*AFNOR_Change() {
@@ -127,8 +182,6 @@ export class ServiceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.service = this.servicesService.retrieveServiceClique();
-    this.yellowStarDisplayer = new Array(Math.floor(4));
-    this.greyStarDisplayer = new Array(Math.floor(1))
     this.getCommentaires(this.service);
   }
 

@@ -18,6 +18,15 @@ export class EntrepriseDetailComponent implements OnInit {
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
+
+  sourcesCommentaires: string[] = [];
+  selectedSource: string;
+
+  moyenneComm: number;
+
+  thumbLabel = true;
+  noteValue: number = 1;
+
   AFNOR: boolean = true;
   NonAFNOR: boolean = true;
 
@@ -28,6 +37,11 @@ export class EntrepriseDetailComponent implements OnInit {
       .subscribe(commentaires => {
         this.commentaires = commentaires;
         this.readyToDisplay = true;
+        this.commentairesFiltres = this.commentaires;
+        this.remplitSources();
+        this.moyenneComm = this.calculeMoyenneCommentaire();
+        this.yellowStarDisplayer = new Array(this.moyenneComm);
+        this.greyStarDisplayer = new Array(5 - this.moyenneComm);
       })
   }
 
@@ -37,6 +51,20 @@ export class EntrepriseDetailComponent implements OnInit {
 
   isInteger(number: number): boolean {
     return Math.floor(number) == number;
+  }
+
+  remplitSources() {
+    this.commentaires.forEach(commentaire => {
+      if (commentaire.source != null && commentaire.source != undefined && commentaire.source != "") {
+        let pasDansLeTableau: boolean = true;
+        if (this.sourcesCommentaires.length > 0) {
+          this.sourcesCommentaires.forEach(source => {
+            if (commentaire.source = source) pasDansLeTableau = false;
+          });
+        }
+        if (pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
+      }
+    });
   }
 
   AFNOR_Change() {
@@ -87,10 +115,20 @@ export class EntrepriseDetailComponent implements OnInit {
     }
   }
 
+  calculeMoyenneCommentaire() {
+    let moyenne: number = 0;
+    let nbComm = 0;
+    this.commentaires.forEach(commentaire => {
+      moyenne += commentaire.note;
+      nbComm++;
+    })
+    return Math.round(moyenne / nbComm);
+  }
+
   ngOnInit() {
     this.entreprise = this.entrepriseService.retrieveEntrepriseClique();
     this.yellowStarDisplayer = new Array(Math.floor(4));
-    this.greyStarDisplayer = new Array(Math.floor(1))
+    this.greyStarDisplayer = new Array(Math.floor(1));
     this.getCommentaires(this.entreprise);
   }
 
