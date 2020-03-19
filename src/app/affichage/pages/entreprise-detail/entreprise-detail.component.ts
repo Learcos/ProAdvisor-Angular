@@ -4,6 +4,7 @@ import { Commentaire } from '../../../utilitaires/anciensTypes/commentaire';
 import { CommentaireService } from '../../../utilitaires/services/commentaire.service';
 import { EntrepriseApi } from '../../../utilitaires/typesAPI/entrepriseApi';
 import { CommentairesApi } from '../../../utilitaires/typesAPI/commentaireApi';
+import { ParamsCommentairesService } from 'src/app/utilitaires/services/params-commentaires.service';
 
 @Component({
   selector: 'app-entreprise-detail',
@@ -22,15 +23,17 @@ export class EntrepriseDetailComponent implements OnInit {
   sourcesCommentaires: string[] = [];
   selectedSource: string;
 
-  moyenneComm: number;
+  moyenneComm: number = 1;
 
   thumbLabel = true;
   noteValue: number = 1;
 
-  AFNOR: boolean = true;
-  NonAFNOR: boolean = true;
+  aFiltre: boolean = false;
 
-  constructor(private entrepriseService: EntrepriseService, private commentaireService: CommentaireService) { }
+  AFNOR_value: string = '';
+  AFNOR_Model: string[] = ['Tous', 'AFNOR', 'Non AFNOR'];
+
+  constructor(private entrepriseService: EntrepriseService, private commentaireService: CommentaireService, private paramsCommService: ParamsCommentairesService) { }
 
   getCommentaires(entreprise: EntrepriseApi) {
     this.commentaireService.getCommentaires(entreprise)
@@ -45,7 +48,7 @@ export class EntrepriseDetailComponent implements OnInit {
       })
   }
 
-  commentairesValidesPourAffichage(commentaires: Commentaire[]) {
+  commentairesValides(commentaires: CommentairesApi[]) {
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
@@ -67,68 +70,53 @@ export class EntrepriseDetailComponent implements OnInit {
     });
   }
 
-  AFNOR_Change() {
-    this.AFNOR = !this.AFNOR;
-    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR);
-    this.commentairesFiltres = this.commentaires;
-    if (this.AFNOR) {
-      if (!this.NonAFNOR) {
-        this.commentairesFiltres = this.commentaires.filter(
-          commentaire => commentaire.respecteAfnor == true
-        );
-      }
-    }
-    else {
-      if (this.NonAFNOR) {
-        console.log(this.commentaires[0].respecteAfnor);
-        this.commentairesFiltres = this.commentaires.filter(
-          commentaire => commentaire.respecteAfnor == false
-        );
-      }
-      else {
-        console.log("AFNOR false, NonAFNOR false");
-        this.commentairesFiltres = null;
-      }
-    }
+  storeDateMin(dateMin: any) {
+    this.paramsCommService.storeDateMin(dateMin.target.value);
   }
 
-  NonAFNOR_Change() {
-    this.NonAFNOR = !this.NonAFNOR;
-    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR)
-    this.commentairesFiltres = this.commentaires;
-    if (!this.NonAFNOR) {
-      if (this.AFNOR) {
-        this.commentairesFiltres = this.commentaires.filter(
-          commentaire => commentaire.respecteAfnor == false
-        );
-      }
+  storeDateMax(dateMax: any) {
+    this.paramsCommService.storeDateMin(dateMax.target.value);
+  }
+
+  storeAFNOR() {
+    let AFNOR: boolean = null;
+    if (this.AFNOR_value == "AFNOR") {
+      AFNOR = true;
     }
-    else {
-      if (this.AFNOR) {
-        this.commentairesFiltres = this.commentaires.filter(
-          commentaire => commentaire.respecteAfnor == true
-        );
-      }
-      else {
-        this.commentairesFiltres = null;
-      }
+    if (this.AFNOR_value == "Non AFNOR") {
+      AFNOR = false;
     }
+    this.paramsCommService.storeAFNOR(AFNOR);
+  }
+
+  filtrerCommentaires() {
+    this.storeAFNOR();
+    this.paramsCommService.storeSource(this.selectedSource);
+    this.paramsCommService.storeNote(this.noteValue);
+    this.paramsCommService.remplitParamsCommentaire();
+    console.log("AFNOR: " + this.AFNOR_value + ", note: " + this.noteValue);
+    this.getCommentaires(this.entreprise);
+    this.aFiltre = true;
   }
 
   calculeMoyenneCommentaire() {
     let moyenne: number = 0;
     let nbComm = 0;
-    this.commentaires.forEach(commentaire => {
-      moyenne += commentaire.note;
-      nbComm++;
-    })
-    return Math.round(moyenne / nbComm);
+    if (this.commentairesValides(this.commentaires)) {
+      this.commentaires.forEach(commentaire => {
+        moyenne += commentaire.note;
+        nbComm++;
+      })
+      return Math.round(moyenne / nbComm);
+    }
+    else{
+      return 1;
+    }
+    
   }
 
   ngOnInit() {
     this.entreprise = this.entrepriseService.retrieveEntrepriseClique();
-    this.yellowStarDisplayer = new Array(Math.floor(4));
-    this.greyStarDisplayer = new Array(Math.floor(1));
     this.getCommentaires(this.entreprise);
   }
 

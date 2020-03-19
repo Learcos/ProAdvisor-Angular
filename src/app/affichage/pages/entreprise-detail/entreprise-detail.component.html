@@ -34,7 +34,7 @@
 
 <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
 
-<mat-radio-group *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay" [(ngModel)]="labelPosition"
+<mat-radio-group *ngIf="commentairesValides(commentaires) && readyToDisplay" [(ngModel)]="labelPosition"
     class="AFNOR">
     <mat-radio-button class="example-margin" value="AFNOR">AFNOR uniquement</mat-radio-button>
     <mat-radio-button class="example-margin" value="NonAFNOR">Non AFNOR uniquement</mat-radio-button>
@@ -90,25 +90,26 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Date min</mat-label>
-            <input matInput>
+            <input matInput (keyup)="storeDateMin($event)">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Date max</mat-label>
-            <input matInput>
+            <input matInput (keyup)="storeDateMax($event)">
         </mat-form-field>
     </div>
     <a mat-raised-button (click)="filtrerCommentaires()">Filtrer</a>
+    <a mat-raised-button (click)="resetParamsComm()">Reset</a>
 </mat-expansion-panel>
 
 <div class="commentairesContainer">
-    <div *ngIf="commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+    <div *ngIf="commentairesValides(commentaires) && readyToDisplay">
         <div *ngFor="let commentaire of commentaires" class="commentaires">
             <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
         </div>
     </div>
-    <div *ngIf="!commentairesValidesPourAffichage(commentaires) && readyToDisplay">
+    <div *ngIf="!commentairesValides(commentaires) && readyToDisplay">
         <h1>No comments</h1>
     </div>
 </div>

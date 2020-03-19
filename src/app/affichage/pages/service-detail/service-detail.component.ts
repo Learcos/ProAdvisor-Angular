@@ -23,7 +23,7 @@ export class ServiceDetailComponent implements OnInit {
   sourcesCommentaires: string[] = [];
   selectedSource: string;
 
-  moyenneComm: number;
+  moyenneComm: number = 1;
 
   thumbLabel = true;
   noteValue: number = 1;
@@ -85,20 +85,20 @@ export class ServiceDetailComponent implements OnInit {
     });
   }
 
-  storeDateMin(dateMin: any){
+  storeDateMin(dateMin: any) {
     this.paramsCommService.storeDateMin(dateMin.target.value);
   }
 
-  storeDateMax(dateMax: any){
+  storeDateMax(dateMax: any) {
     this.paramsCommService.storeDateMin(dateMax.target.value);
   }
 
-  storeAFNOR(){
+  storeAFNOR() {
     let AFNOR: boolean = null;
-    if(this.AFNOR_value == "AFNOR"){
+    if (this.AFNOR_value == "AFNOR") {
       AFNOR = true;
     }
-    if(this.AFNOR_value == "Non AFNOR"){
+    if (this.AFNOR_value == "Non AFNOR") {
       AFNOR = false;
     }
     this.paramsCommService.storeAFNOR(AFNOR);
@@ -117,14 +117,20 @@ export class ServiceDetailComponent implements OnInit {
   calculeMoyenneCommentaire() {
     let moyenne: number = 0;
     let nbComm = 0;
-    this.commentaires.forEach(commentaire => {
-      moyenne += commentaire.note;
-      nbComm++;
-    })
-    return Math.round(moyenne / nbComm);
+    if (this.commentairesValides(this.commentaires)) {
+      this.commentaires.forEach(commentaire => {
+        moyenne += commentaire.note;
+        nbComm++;
+      })
+      return Math.round(moyenne / nbComm);
+    }
+    else {
+      return 1;
+    }
+
   }
 
-  resetParamsComm(){
+  resetParamsComm() {
     this.paramsCommService.resetParams();
     this.noteValue = null;
     this.AFNOR_value = null;
