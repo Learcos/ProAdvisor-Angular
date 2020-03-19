@@ -13,16 +13,13 @@ export class EntrepriseService {
 
   constructor(private http: HttpClient, private paramsService: ParamsRechercheService) { }
 
-  private entreprisesUrl = 'https://api.r-pro-advisor.gq/Entreprise';  // URL to web api
+  private entreprisesUrl = 'https://api.r-pro-advisor.gq/Entreprise/';  // URL to web api
   private entrepriseClique: EntrepriseApi;
-  private siret: string;
-  private ville: string;
-
 
   //retourne toutes les entreprises
   getEntreprises(): Observable<EntrepriseApi[]> {
     let params: string;
-    params = this.paramsService.remplitParams();
+    params = this.paramsService.remplitParamsEntreprise();
     if(params != null && params != undefined){
       console.log("params:", params);
       return this.http.get<EntrepriseApi[]>(this.entreprisesUrl + params)
@@ -39,10 +36,10 @@ export class EntrepriseService {
     
   }
 
-  getEntreprisesParSiret(siret: number): Observable<EntrepriseApi[]> {
-    return this.http.get<EntrepriseApi[]>(this.entreprisesUrl + siret)
+  getEntreprisesParSiret(siret: number): Observable<EntrepriseApi> {
+    return this.http.get<EntrepriseApi>(this.entreprisesUrl + siret)
       .pipe(
-        catchError(this.handleError<EntrepriseApi[]>('getEntreprises'))
+        catchError(this.handleError<EntrepriseApi>('getEntreprises'))
       );
   }
 

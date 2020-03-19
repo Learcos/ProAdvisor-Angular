@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
 import { ServiceApi } from '../typesAPI/serviceApi';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ParamsRechercheService } from './params-recherche.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,24 @@ export class ServiceApiService {
   private servicesUrl = 'https://api.r-pro-advisor.gq/Service/';  // URL to web api
   private serviceClique: ServiceApi;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private paramsService: ParamsRechercheService) { }
 
   getServices(): Observable<ServiceApi[]> {
-    return this.http.get<ServiceApi[]>(this.servicesUrl)
+    let params: string;
+    params = this.paramsService.remplitParamsService();
+    if(params != null && params != undefined){
+      console.log("params:", params);
+      return this.http.get<ServiceApi[]>(this.servicesUrl + params)
       .pipe(
-        catchError(this.handleError<ServiceApi[]>('getServices'))
+        catchError(this.handleError<ServiceApi[]>('getEntreprises'))
       );
+    }
+    else{
+      return this.http.get<ServiceApi[]>(this.servicesUrl)
+      .pipe(
+        catchError(this.handleError<ServiceApi[]>('getEntreprises'))
+      );
+    }
   }
 
   getServiceByURL(urlService: string): Observable<ServiceApi> {

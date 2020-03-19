@@ -34,23 +34,11 @@ export class SearchResultsComponent implements OnInit {
   services: ServiceApi[];
 
 
-  getEntreprises(ville?: string): void {
-    if (this.stringValide(ville)) {
-      this.entrepriseService.getEntreprisesParVille(ville)
-        .subscribe(entreprises => {
-          this.entreprises = entreprises;
-          this.entreprisesBis = entreprises;
-          //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
-        });
-    }
-    else {
-      this.entrepriseService.getEntreprises()
-        .subscribe(entreprises => {
-          this.entreprises = entreprises;
-          this.entreprisesBis = entreprises;
-          //this.topEntreprises = this.retourneTopEntreprises(this.entreprisesBis);
-        });
-    }
+  getEntreprises(): void {
+    this.entrepriseService.getEntreprises()
+      .subscribe(entreprises => {
+        this.entreprises = entreprises;
+      });
   }
 
   getServices(): void {
@@ -95,9 +83,7 @@ export class SearchResultsComponent implements OnInit {
     this.inputValue = this.route.snapshot.paramMap.get("name");
     console.log(this.inputValue);
     this.categorieClicked = this.route.snapshot.paramMap.get("categorie");
-    this.ville = this.paramsService.retrieveVille();
-    console.log(this.ville);
-    this.getEntreprises(this.ville);
+    this.getEntreprises();
     this.getServices();
     this.paramsService.resetParams();
   }

@@ -18,11 +18,13 @@ import { MapComponent } from './affichage/map/map.component';
 import { ServiceViewTemplateComponent } from './affichage/templates/service-view-template/service-view-template.component';
 import { ServiceDetailComponent } from './affichage/pages/service-detail/service-detail.component';
 
-import { MatInputModule, MatCheckboxModule, MatCardModule, MatRadioModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatCheckboxModule, MatCardModule, MatRadioModule, MatSelectModule, } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAjoutComponent } from './affichage/pages/form-ajout/form-ajout.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
     ServiceViewTemplateComponent,
     ServiceDetailComponent,
     FormAjoutComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +55,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatSliderModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

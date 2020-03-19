@@ -34,11 +34,6 @@
 
 <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
 
-<div class="checkboxes">
-    <mat-checkbox [(ngModel)]="AFNOR" [ngModelOptions]="{standalone: true}" (click)="AFNOR_Change()">AFNOR</mat-checkbox>
-    <mat-checkbox [(ngModel)]="NonAFNOR" [ngModelOptions]="{standalone: true}" (click)="NonAFNOR_Change()">Non AFNOR</mat-checkbox>
-</div>
-
 <div class="services">
     <span>
         <h2>Services proposés:</h2>
@@ -57,13 +52,57 @@
     </ng-template>
 </div>
 
+
+
+<mat-expansion-panel class="marginLeft column" *ngIf="commentairesValides(commentairesFiltres) && readyToDisplay">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <h1>Filtrer les commentaires</h1>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+        <mat-form-field>
+            <mat-label>Sources</mat-label>
+            <mat-select [(ngModel)]="selectedSource" name="source">
+                <mat-option *ngFor="let source of sourcesCommentaires" [value]="source">
+                    {{source}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-label>AFNOR:</mat-label>
+    <mat-radio-group *ngIf="commentairesValides(commentaires) && readyToDisplay" [(ngModel)]="AFNOR_value"
+        class="marginLeft">
+        <mat-radio-button class="example-radio-button" *ngFor="let AF of AFNOR_Model" [value]="AF"
+            (change)="updateAFNOR()">
+            {{AF}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <h2>Note</h2>
+    <mat-slider class="example-margin" [max]=5 [min]=1 [step]=1 [thumbLabel]="thumbLabel" [tickInterval]=1
+        [(ngModel)]="noteValue">
+    </mat-slider>
+    <div>
+        <mat-form-field class="example-full-width">
+            <mat-label>Date min</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field class="example-full-width">
+            <mat-label>Date max</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+</mat-expansion-panel>
+
 <div class="marginLeft">
-    <div *ngIf="commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
+    <div *ngIf="commentairesValides(commentairesFiltres) && readyToDisplay">
         <div *ngFor="let commentaire of commentairesFiltres" class="commentaires">
             <app-commentaire-view-template [commentaire]="commentaire"></app-commentaire-view-template>
         </div>
     </div>
-    <div *ngIf="!commentairesValidesPourAffichage(commentairesFiltres) && readyToDisplay">
+    <div *ngIf="!commentairesValides(commentairesFiltres) && readyToDisplay">
         <h1>No comments</h1>
     </div>
 </div>

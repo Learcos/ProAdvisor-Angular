@@ -21,7 +21,7 @@ export class PageAccueilComponent implements OnInit {
 
   siret: number;
   url: string;
-  gratuit: boolean = false;
+  gratuit: boolean;
 
   options: FormGroup;
   hideRequiredControl = new FormControl(false);
@@ -38,14 +38,6 @@ export class PageAccueilComponent implements OnInit {
     this.inputValue = value.trim();
   }
 
-  storeVille(ville: any) {
-    this.paramsService.storeVille(ville.target.value);
-  }
-
-  storeSiren(siren: any) {
-    this.paramsService.storeSiren(siren.target.value);
-  }
-
   storeSiret(siret: any) {
     this.paramsService.storeSiret(siret.target.value);
     this.siret = siret.target.value;
@@ -56,10 +48,38 @@ export class PageAccueilComponent implements OnInit {
     this.url = url.target.value;
   }
 
+  storeVille(ville: any) {
+    this.paramsService.storeVille(ville.target.value);
+  }
+
+  store_Service(service: any) {
+    this.paramsService.storeService(service.target.value);
+  }
+  
+  updateGratuit(){
+    this.gratuit = !this.gratuit;
+  }
+
+  storeGratuit(){
+    this.paramsService.storeGratuit(this.gratuit);
+  }
+
+  storeZone(zone: any){
+    this.paramsService.storeZone(zone.target.value);
+  }
+
+  storeNbCommMin(nb: any){
+    this.paramsService.storeNbCommMin(nb.target.value);
+  }
+
+  /*storeSiren(siren: any) {
+    this.paramsService.storeSiren(siren.target.value);
+  }*/
+
   storeEntreprise(){
     this.entrepriseService.getEntreprisesParSiret(this.siret).subscribe(
       entreprise => {
-        this.entrepriseService.storeEntrepriseClique(entreprise[0]);
+        this.entrepriseService.storeEntrepriseClique(entreprise);
         this.router.navigateByUrl("/entreprises/" + this.siret);
       }
     );

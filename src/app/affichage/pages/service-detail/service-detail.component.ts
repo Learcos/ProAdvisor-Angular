@@ -14,11 +14,19 @@ export class ServiceDetailComponent implements OnInit {
   service: ServiceApi;
   commentaires: CommentairesApi[];
   commentairesFiltres: CommentairesApi[];
+
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
-  AFNOR: boolean = true;
-  NonAFNOR: boolean = true;
+
+  sourcesCommentaires: string[] = [];
+  selectedSource: string;
+
+  thumbLabel = true;
+  noteValue: number = 1;
+
+  AFNOR_value: string = '';
+  AFNOR_Model: string[] = ['Tous', 'AFNOR', 'Non AFNOR'];
 
   constructor(private servicesService: ServiceApiService, private commentaireService: CommentaireService) { }
 
@@ -28,10 +36,11 @@ export class ServiceDetailComponent implements OnInit {
         this.commentaires = commentaires;
         this.readyToDisplay = true;
         this.commentairesFiltres = this.commentaires;
+        this.remplitSources();
       })
   }
 
-  commentairesValidesPourAffichage(commentaires: CommentairesApi[]) {
+  commentairesValides(commentaires: CommentairesApi[]) {
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
@@ -39,7 +48,36 @@ export class ServiceDetailComponent implements OnInit {
     return Math.floor(number) == number;
   }
 
-  AFNOR_Change() {
+  updateAFNOR() {
+    console.log("update AFNOR: " + this.AFNOR_value);
+    switch (this.AFNOR_value) {
+      case "AFNOR":
+        console.log("AFNOR: " + this.AFNOR_value);
+        this.commentairesFiltres = this.commentaires.filter(commentaire => commentaire.respecteAfnor);
+      case "Non AFNOR":
+        console.log("NonAFNOR: " + this.AFNOR_value);
+        this.commentairesFiltres = this.commentaires.filter(commentaire => !commentaire.respecteAfnor);
+      case "Tous":
+        console.log("TOus");
+        this.commentairesFiltres = this.commentaires;
+    }
+  }
+
+  remplitSources() {
+    this.commentaires.forEach(commentaire => {
+      if(commentaire.source != null && commentaire.source != undefined && commentaire.source != ""){
+        let pasDansLeTableau: boolean = true;
+        if(this.sourcesCommentaires.length > 0){
+          this.sourcesCommentaires.forEach(source => {
+            if(commentaire.source = source) pasDansLeTableau = false;
+          });
+        }
+        if(pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
+      }
+    });
+  }
+
+  /*AFNOR_Change() {
     this.AFNOR = !this.AFNOR;
     console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR);
     this.commentairesFiltres = this.commentaires;
@@ -85,10 +123,9 @@ export class ServiceDetailComponent implements OnInit {
         this.commentairesFiltres = null;
       }
     }
-  }
+  }*/
 
   ngOnInit() {
-    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR)
     this.service = this.servicesService.retrieveServiceClique();
     this.yellowStarDisplayer = new Array(Math.floor(4));
     this.greyStarDisplayer = new Array(Math.floor(1))

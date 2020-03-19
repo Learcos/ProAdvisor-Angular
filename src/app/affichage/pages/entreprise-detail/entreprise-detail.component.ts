@@ -14,6 +14,7 @@ export class EntrepriseDetailComponent implements OnInit {
 
   entreprise: EntrepriseApi;
   commentaires: CommentairesApi[];
+  commentairesFiltres: CommentairesApi[];
   readyToDisplay: boolean = false;
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;
@@ -34,40 +35,63 @@ export class EntrepriseDetailComponent implements OnInit {
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 
-  storeEntrepriseCliquee() {
-    if (!localStorage.getItem('entreprise')) {
-      localStorage.setItem('entreprise', JSON.stringify(this.entrepriseService.retrieveEntrepriseClique()));
-    }
-  }
-
   isInteger(number: number): boolean {
     return Math.floor(number) == number;
   }
 
-  filtreCommentairesAFNOROuNon(AFNOR: boolean) {
-    this.commentaires.filter(
-      commentaire => commentaire.respecteAfnor == AFNOR
-    );
+  AFNOR_Change() {
+    this.AFNOR = !this.AFNOR;
+    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR);
+    this.commentairesFiltres = this.commentaires;
+    if (this.AFNOR) {
+      if (!this.NonAFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+    }
+    else {
+      if (this.NonAFNOR) {
+        console.log(this.commentaires[0].respecteAfnor);
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+      else {
+        console.log("AFNOR false, NonAFNOR false");
+        this.commentairesFiltres = null;
+      }
+    }
   }
 
-  changeCommentsAFNOR(){
-    this.filtreCommentairesAFNOROuNon(true);
-  }
-
-  changeCommentsNonAFNOR(){
-    this.filtreCommentairesAFNOROuNon(false);
+  NonAFNOR_Change() {
+    this.NonAFNOR = !this.NonAFNOR;
+    console.log("AFNOR: " + this.AFNOR + ", NonAFNOR: " + this.NonAFNOR)
+    this.commentairesFiltres = this.commentaires;
+    if (!this.NonAFNOR) {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == false
+        );
+      }
+    }
+    else {
+      if (this.AFNOR) {
+        this.commentairesFiltres = this.commentaires.filter(
+          commentaire => commentaire.respecteAfnor == true
+        );
+      }
+      else {
+        this.commentairesFiltres = null;
+      }
+    }
   }
 
   ngOnInit() {
-    this.storeEntrepriseCliquee();
-    this.entreprise = JSON.parse(localStorage.getItem('entreprise'));
+    this.entreprise = this.entrepriseService.retrieveEntrepriseClique();
     this.yellowStarDisplayer = new Array(Math.floor(4));
     this.greyStarDisplayer = new Array(Math.floor(1))
     this.getCommentaires(this.entreprise);
-  }
-
-  ngOnDestroy() {
-    localStorage.clear();
   }
 
 }
