@@ -102,18 +102,15 @@
   <app-search-bar></app-search-bar>
 </body>
 -->
-
+<html>
 <div>
   <h1 class="center">
     {{ title }}
   </h1>
 </div>
+<body>
 
 <!--
-<div class="search-result center">
-  <input #searchBox id="search-box" (input)="updateValue(searchBox.value)" />
-</div>-->
-
 <form class="example-form" [ngClass]="{'clicked': !rechercheEntreprise} ">
   <div [ngClass]="{'title': rechercheEntreprise}">Recherche entreprise par Siret</div>
   <mat-form-field class="example-full-width">
@@ -121,11 +118,7 @@
     <input (keyup)="storeSiret($event)" (focus)="majRechercheEntreprise()" matInput>
   </mat-form-field>
   <a mat-raised-button (click)="storeEntreprise()" [ngClass]="{'small-size-button': !rechercheEntreprise}">Search</a>
-</form>
 
-<!-- [routerLink]="['/entreprises/', siret]" -->
-
-<form class="example-form" [ngClass]="{'clicked': !rechercheService} ">
   <div [ngClass]="{'title': rechercheService}">Recherche service par URL</div>
   <mat-form-field class="example-full-width">
     <mat-label>Entrez l'URL du service recherché</mat-label>
@@ -143,10 +136,10 @@
         <mat-label>Ville</mat-label>
         <input (keyup)="storeVille($event)" (focus)="majRechercheAvancee()" matInput>
       </mat-form-field>
-      <!-- <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width">
         <mat-label>Siren entreprise</mat-label>
         <input (keyup)="storeSiren($event)" (focus)="majRechercheAvancee()" matInput>
-      </mat-form-field> -->
+      </mat-form-field> 
       <mat-form-field class="example-full-width">
         <mat-label>Zone d'intervention</mat-label>
         <input (keyup)="storeZone($event)" (focus)="majRechercheAvancee()" matInput>
@@ -171,3 +164,104 @@
   <a mat-raised-button (click)="storeGratuit()" [routerLink]="['/entreprises']"
     [ngClass]="{'small-size-button': !rechercheAvancee}">Search</a>
 </form>
+
+-->
+
+
+    <div class="s009">
+      <form>
+        <div class="inner-form">
+          <!--<div [ngClass]="{'title': rechercheEntreprise}">Recherche entreprise par Siret</div>-->
+          <div class="basic-search">
+            <div class="input-field">
+              <mat-label>Entrez le num de Siret de l'entreprise recherchée</mat-label>
+              <input (keyup)="storeSiret($event)" (focus)="majRechercheEntreprise()" id="siret" type="text" placeholder="Numero siret" />
+              <div class="icon-wrap">
+                <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!--<div [ngClass]="{'title': rechercheEntreprise}">Recherche service par URL</div>-->
+          <div class="basic-search">
+            <div class="input-field">
+              <mat-label>Entrez l'URL du service recherché</mat-label>
+              <input (keyup)="storeUrl($event)" (focus)="majRechercheService()" id="service" type="text" placeholder="URL entreprise" />
+              <div class="icon-wrap">
+                <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="advance-search">
+            <span class="desc">ADVANCED SEARCH</span>
+            <div class="row">
+              <div [ngClass]="{'sous-titre': rechercheAvancee}">Pour les entreprises:</div>
+                <div class="decalage">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Ville</mat-label>
+                    <input (keyup)="storeVille($event)" (focus)="majRechercheAvancee()" matInput>
+                  </mat-form-field>
+                  <!-- <mat-form-field class="example-full-width">
+                    <mat-label>Siren entreprise</mat-label>
+                    <input (keyup)="storeSiren($event)" (focus)="majRechercheAvancee()" matInput>
+                  </mat-form-field> -->
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Zone d'intervention</mat-label>
+                    <input (keyup)="storeZone($event)" (focus)="majRechercheAvancee()" matInput>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Service proposé</mat-label>
+                    <input (keyup)="store_Service($event)" (focus)="majRechercheAvancee()" matInput>
+                  </mat-form-field>
+                </div>
+            </div>
+            <div class="row second">
+              <div [ngClass]="{'sous-titre': rechercheAvancee}">Entreprises et services:</div>
+                <mat-checkbox [formControl]="hideRequiredControl" class="changeColor" (click)="updateGratuit()">N'afficher que les
+                  résultats
+                  présentant des prestations gratuites (devis...)</mat-checkbox>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Nombre de commentaires minimum</mat-label>
+                  <input (keyup)="storeNbCommMin($event)" (focus)="majRechercheAvancee()" matInput>
+                </mat-form-field>
+            </div>
+            <div class="row third">
+              <div class="input-field">
+                <div class="result-count">
+                  <span>108 </span>results</div>
+                <div class="group-btn">
+                  <button class="btn-delete" id="delete">RESET</button>
+                  <button class="btn-search">SEARCH</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="js/extention/choices.js"></script>
+    <script>
+      const customSelects = document.querySelectorAll("select");
+      const deleteBtn = document.getElementById('delete')
+      const choices = new Choices('select',
+      {
+        searchEnabled: false,
+        itemSelectText: '',
+        removeItemButton: true,
+      });
+      deleteBtn.addEventListener("click", function(e)
+      {
+        e.preventDefault()
+        const deleteAll = document.querySelectorAll('.choices__button')
+        for (let i = 0; i < deleteAll.length; i++)
+        {
+          deleteAll[i].click();
+        }
+      });
+
+    </script>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

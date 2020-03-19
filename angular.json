@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "R-Pro-Angular"
+  "defaultProject": "R-Pro-Angular",
+  "cli": {
+    "analytics": "3bfad9a8-2b5a-4ca3-a1c1-e4ed38f5a6dc"
+  }
 }
