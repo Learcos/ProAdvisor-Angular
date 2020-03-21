@@ -175,10 +175,12 @@
         <!--<div [ngClass]="{'title': rechercheEntreprise}">Recherche entreprise par Siret</div>-->
         <div class="basic-search">
           <div class="input-field">
-            <mat-label>Entrez le num de Siret de l'entreprise recherchée</mat-label>
+            <mat-label>
+              <h3>Recherche d'entreprise par numéro Siret</h3>
+            </mat-label>
             <input (keyup)="storeSiret($event)" (focus)="majRechercheEntreprise()" id="siret" type="text"
               placeholder="Numero siret" />
-            <a mat-raised-button (click)="storeEntreprise()" class="matbutton">Search</a>
+            <a mat-raised-button (click)="storeEntreprise()" class="matbutton">SEARCH</a>
             <div class="icon-wrap">
               <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas"
                 data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -192,10 +194,10 @@
         <!--<div [ngClass]="{'title': rechercheEntreprise}">Recherche service par URL</div>-->
         <div class="basic-search">
           <div class="input-field">
-            <mat-label>Entrez l'URL du service recherché</mat-label>
+            <mat-label><h3>Recherche de service web par URL</h3></mat-label>
             <input (keyup)="storeUrl($event)" (focus)="majRechercheService()" id="service" type="text"
-              placeholder="URL entreprise" />
-            <a mat-raised-button (click)="storeService()" class="group-btn">Search</a>
+              placeholder="URL service" />
+            <a mat-raised-button (click)="storeService()" class="matbutton">SEARCH</a>
             <div class="icon-wrap">
               <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas"
                 data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

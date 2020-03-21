@@ -25,6 +25,7 @@ import { FormAjoutComponent } from './affichage/pages/form-ajout/form-ajout.comp
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MatSliderModule } from '@angular/material/slider';
     ReactiveFormsModule,
     MatExpansionModule,
     MatSliderModule,
+    MatGridListModule
   ],
   providers: [
   ],

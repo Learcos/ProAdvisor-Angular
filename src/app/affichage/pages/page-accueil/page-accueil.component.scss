@@ -821,6 +821,7 @@ html {
     background: #d9eff5;
     padding: 15px;
     font-family: 'Lato', sans-serif;
+    flex-flow: column wrap;
   }
   
   .s009 form {
@@ -969,6 +970,7 @@ html {
     -ms-flex-align: center;
         align-items: center;
     margin-bottom: 20px;
+    flex-flow: column wrap;
   }
   
   .s009 form .inner-form .advance-search .row.second {
@@ -1141,6 +1143,28 @@ html {
       margin-bottom: 20px;
     }
   }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline{
+    width: 90% !important;
+  }
+
+  .mat-form-field-underline{
+    width: 90%;
+  }
+
+.sous-titre{
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.matbutton{
+  background-color: white;
+}
+
+.advance-search{
+  margin-top: 25px; 
+}
+
   
   /*# sourceMappingURL=Searchs_009.css.map */
   

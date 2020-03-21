@@ -76,10 +76,27 @@ mat-radio-button {
 }
 
 mat-expansion-panel {
-  width: 35%;
+  width: 49%;
   margin-bottom: 2%;
 }
 
 .mat-raised-button {
   float: right;
+}
+
+.flex{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.flexElement1{
+  width: 70%;
+}
+
+.flexElement2{
+  width: 25%; 
+}
+
+.commentairesContainer{
+  margin-left: 15%;
 }
