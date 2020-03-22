@@ -4,11 +4,13 @@ import { PageAccueilComponent }   from './affichage/pages/page-accueil/page-accu
 import { SearchResultsComponent } from './affichage/pages/search-results/search-results.component'
 import { EntrepriseDetailComponent } from './affichage/pages/entreprise-detail/entreprise-detail.component';
 import { ServiceDetailComponent } from './affichage/pages/service-detail/service-detail.component';
+import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
 
 
 const routes: Routes = [
   { path: 'accueil', component: PageAccueilComponent },
   { path: 'entreprises', component: SearchResultsComponent},
+  { path: '', component: PageSuggestionComponent},
   { path: 'entreprises/:siret', component: EntrepriseDetailComponent, data: {entreprise: 'entreprise'}},
   { path: 'services/:url', component: ServiceDetailComponent, data: {service: 'service'}},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }

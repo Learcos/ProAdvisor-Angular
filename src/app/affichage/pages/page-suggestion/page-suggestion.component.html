@@ -1,0 +1,86 @@
+
+<mat-tab-group dynamicHeight>
+    <mat-tab label = "Entreprise">
+        <form [formGroup]="suggestForm" (ngSubmit)="suggestEntreprise()">
+        <p>Nom de l'entreprise</p>
+         <mat-form-field>
+         <input matInput type="text" class="form-control" formControlName="nomEntreprise" placeholder="nom de l'entreprise">
+        </mat-form-field>
+        <p>SIREN</p>
+        <mat-form-field>
+          <input matInput type="password" class="form-control" formControlName="siren" placeholder="SIREN">
+         </mat-form-field>
+         <p>Adresse</p>
+         <mat-form-field>
+          <input matInput type="text" class="form-control" formControlName="adresse" placeholder="Adresse">
+        </mat-form-field>
+        <p>URL site web</p>
+         <mat-form-field>
+           <input matInput type="password" class="form-control" formControlName="site" placeholder="Site">
+         </mat-form-field>
+         <p>Categorie</p>
+       <mat-form-field>
+         <mat-select type="text" class="form-control" formControlName="categorie" placeholder="Aucunes">
+             <mat-option value="test">Test</mat-option>
+                <mat-option value="test2">Test2</mat-option>
+            </mat-select>
+       </mat-form-field>
+        <p>Description</p>
+           <mat-form-field>
+            <textarea matInput type="password" class="form-control" formControlName="description" placeholder="Entrez votre description ici" cdkTextareaAutosize
+#autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" ></textarea>
+           </mat-form-field>
+       <p>Nom d'utilisateur</p>
+       <mat-form-field>
+         <input matInput type="text" class="form-control" formControlName="username" placeholder="username">
+       </mat-form-field>
+        <p>Mot de passe</p>
+      <mat-form-field>
+        <input matInput type="password" class="form-control" formControlName="password" placeholder="password">
+       </mat-form-field>
+        <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">OK</button>
+    
+       </form>
+    </mat-tab>
+    <mat-tab label = "ServiceWeb">
+        <form [formGroup]="suggestForm" (ngSubmit)="suggestSW()">
+        <p>Nom de l'entreprise</p>
+         <mat-form-field>
+         <input matInput type="text" class="form-control" formControlName="nomEntreprise" placeholder="nom de l'entreprise">
+        </mat-form-field>
+        <p>SIREN</p>
+        <mat-form-field>
+          <input matInput type="password" class="form-control" formControlName="siren" placeholder="SIREN">
+         </mat-form-field>
+         <p>Adresse</p>
+         <mat-form-field>
+          <input matInput type="text" class="form-control" formControlName="adresse" placeholder="Adresse">
+        </mat-form-field>
+        <p>URL site web</p>
+         <mat-form-field>
+           <input matInput type="password" class="form-control" formControlName="site" placeholder="Site">
+         </mat-form-field>
+         <p>Categorie</p>
+       <mat-form-field>
+         <mat-select type="text" class="form-control" formControlName="categorie" placeholder="Aucunes">
+             <mat-option value="test">Test</mat-option>
+                <mat-option value="test2">Test2</mat-option>
+            </mat-select>
+       </mat-form-field>
+        <p>Description</p>
+           <mat-form-field>
+            <input matInput type="password" class="form-control" formControlName="description" placeholder="Entrez votre description ici">
+           </mat-form-field>
+       <p>Nom d'utilisateur</p>
+       <mat-form-field>
+         <input matInput type="text" class="form-control" formControlName="username" placeholder="username">
+       </mat-form-field>
+        <p>Mot de passe</p>
+      <mat-form-field>
+        <input matInput type="password" class="form-control" formControlName="password" placeholder="password">
+       </mat-form-field>
+        <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">OK</button>
+    
+       </form>
+    </mat-tab>
+</mat-tab-group>

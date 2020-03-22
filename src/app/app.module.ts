@@ -26,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ServiceDetailComponent,
     FormAjoutComponent,
     SearchBarComponent,
+    PageSuggestionComponent,
   ],
   imports: [
     BrowserModule,
