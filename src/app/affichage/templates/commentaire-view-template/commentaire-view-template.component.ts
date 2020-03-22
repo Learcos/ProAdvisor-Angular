@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Commentaire } from '../../../utilitaires/anciensTypes/commentaire';
+import { CommentairesApi } from 'src/app/utilitaires/typesAPI/commentaireApi';
 
 @Component({
   selector: 'app-commentaire-view-template',
@@ -8,7 +8,7 @@ import { Commentaire } from '../../../utilitaires/anciensTypes/commentaire';
 })
 export class CommentaireViewTemplateComponent implements OnInit {
 
-  @Input() commentaire: Commentaire;
+  @Input() commentaire: CommentairesApi;
 
   yellowStarDisplayer: Array<number>;
   greyStarDisplayer: Array<number>;

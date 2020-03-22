@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EntrepriseService } from '../../../utilitaires/services/entreprise.service';
-import { Commentaire } from '../../../utilitaires/anciensTypes/commentaire';
 import { CommentaireService } from '../../../utilitaires/services/commentaire.service';
 import { EntrepriseApi } from '../../../utilitaires/typesAPI/entrepriseApi';
 import { CommentairesApi } from '../../../utilitaires/typesAPI/commentaireApi';

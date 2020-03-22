@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageAccueilComponent } from './affichage/pages/page-accueil/page-accueil.component';
 import { SearchResultsComponent } from './affichage/pages/search-results/search-results.component';
-import { SearchBarComponent } from './affichage/templates/search-bar/search-bar.component'
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +41,6 @@ import { ValidationComponent } from './affichage/pages/validation/validation.com
     MapComponent,
     ServiceViewTemplateComponent,
     ServiceDetailComponent,
-    SearchBarComponent,
     PageSuggestionComponent,
     ValidationComponent
   ],

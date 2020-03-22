@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentaireService } from '../../../utilitaires/services/commentaire.service';
-import { Commentaire } from '../../../utilitaires/anciensTypes/commentaire';
+import { CommentairesApi } from 'src/app/utilitaires/typesAPI/commentaireApi';
 
 @Component({
   selector: 'app-etoile-pourcentage',
@@ -16,9 +16,9 @@ export class EtoilePourcentageComponent implements OnInit {
   threeStarsTab: Array<number>;
   fourStarsTab: Array<number>;
   fiveStarsTab: Array<number>;
-  @Input() commentaires: Commentaire[];
+  @Input() commentaires: CommentairesApi[];
 
-  pourcentCommentairesNote(commentaires: Commentaire[], note: number): number {
+  pourcentCommentairesNote(commentaires: CommentairesApi[], note: number): number {
     let nbNotesCorrespondantes: number = 0;
     commentaires.forEach(
       commentaire => {
@@ -30,7 +30,7 @@ export class EtoilePourcentageComponent implements OnInit {
     return Math.round((nbNotesCorrespondantes*100)/commentaires.length);
   }
 
-  commentairesValides(commentaires: Commentaire[]): boolean{
+  commentairesValides(commentaires: CommentairesApi[]): boolean{
     return commentaires != null && commentaires != undefined && commentaires.length > 0;
   }
 

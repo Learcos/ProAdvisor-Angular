@@ -135,6 +135,8 @@ export class ParamsRechercheService {
     this.url = null;
     this.zone = null;
     this.service = null;
+    this.nbCommMin = null;
+    this.gratuit = null;
   }
 
   constructor() { }
