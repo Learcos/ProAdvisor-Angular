@@ -78,6 +78,7 @@ export class ParamsCommentairesService {
       params += "DateMax=" + this.dateMax;
       nbParams++;
     }
+    console.log("params: " + params);
     return params;
   }
 

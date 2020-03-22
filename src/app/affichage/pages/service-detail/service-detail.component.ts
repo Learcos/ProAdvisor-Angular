@@ -26,7 +26,7 @@ export class ServiceDetailComponent implements OnInit {
   moyenneComm: number = 1;
 
   thumbLabel = true;
-  noteValue: number = 1;
+  noteValue: number;
 
   aFiltre: boolean = false;
 
@@ -90,7 +90,7 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   storeDateMax(dateMax: any) {
-    this.paramsCommService.storeDateMin(dateMax.target.value);
+    this.paramsCommService.storeDateMax(dateMax.target.value);
   }
 
   storeAFNOR() {
@@ -109,7 +109,7 @@ export class ServiceDetailComponent implements OnInit {
     this.paramsCommService.storeSource(this.selectedSource);
     this.paramsCommService.storeNote(this.noteValue);
     this.paramsCommService.remplitParamsCommentaire();
-    console.log("AFNOR: " + this.AFNOR_value + ", note: " + this.noteValue);
+    console.log("AFNOR: " + this.AFNOR_value + ", date min: " + this.noteValue);
     this.getCommentaires(this.service);
     this.aFiltre = true;
   }
