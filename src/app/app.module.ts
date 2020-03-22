@@ -21,7 +21,6 @@ import { ServiceDetailComponent } from './affichage/pages/service-detail/service
 import { MatInputModule, MatCheckboxModule, MatCardModule, MatRadioModule, MatSelectModule, } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormAjoutComponent } from './affichage/pages/form-ajout/form-ajout.component';
 import { MatButtonModule } from '@angular/material/button';
 import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
 import { MatTabsModule } from '@angular/material';
@@ -43,7 +42,6 @@ import { ValidationComponent } from './affichage/pages/validation/validation.com
     MapComponent,
     ServiceViewTemplateComponent,
     ServiceDetailComponent,
-    FormAjoutComponent,
     SearchBarComponent,
     PageSuggestionComponent,
     ValidationComponent
