@@ -23,10 +23,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAjoutComponent } from './affichage/pages/form-ajout/form-ajout.component';
 import { MatButtonModule } from '@angular/material/button';
+import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
+import { MatTabsModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
+import { ValidationComponent } from './affichage/pages/validation/validation.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-
     FormAjoutComponent,
     SearchBarComponent,
     PageSuggestionComponent,
+    ValidationComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatTabsModule,
     MatExpansionModule,
     MatSliderModule,
     MatGridListModule
