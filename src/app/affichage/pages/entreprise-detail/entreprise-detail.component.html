@@ -21,8 +21,9 @@
         </div>
         <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
 
-        <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span>TEL SI DISPO</p>
-        <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>Adresse si dispo</p>
+        <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span>{{entreprise.telephone}}</p>
+        <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>{{entreprise.adresse}}</p>
+        <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>{{entreprise.ville}} - {{entreprise.codePostal}}</p>
     </div>
 </div>
 
