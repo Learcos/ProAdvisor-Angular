@@ -4,7 +4,7 @@
 <div *ngIf="pagesupp; else valid">
 <mat-tab-group dynamicHeight>
     <mat-tab label = "Entreprise">
-        <form [formGroup]="suggestForm" (ngSubmit)="suggestEntreprise()">
+        <form [formGroup]="suggestFormEntreprise" (ngSubmit)="suggestEntreprise()">
         <p>Nom de l'entreprise</p>
          <mat-form-field>
          <input matInput type="text" class="form-control" formControlName="nom" >
@@ -27,7 +27,7 @@
         </mat-form-field>
         <p>Telephone</p>
         <mat-form-field>
-            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 0382829539" >
+            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 03XXXXXXXX" >
         </mat-form-field>
         <p>Description</p>
            <mat-form-field>
@@ -55,13 +55,13 @@
             <input matInput type="text" class="form-control" formControlName="zoneIntervention" >
         </mat-form-field>
         <p>
-            <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
+            <button mat-button [disabled]="!suggestFormEntreprise.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
          </p>
     
        </form>
     </mat-tab>
     <mat-tab label = "ServiceWeb">
-        <form [formGroup]="suggestForm" (ngSubmit)="suggestSW()">
+        <form [formGroup]="suggestFormService" (ngSubmit)="suggestSW()">
         <p>URL du service</p>
          <mat-form-field>
          <input matInput type="text" class="form-control" formControlName="URLService">
@@ -74,22 +74,18 @@
          <mat-form-field>
           <input matInput type="text" class="form-control" formControlName="representant" >
         </mat-form-field>
-        <p>Description</p>
-           <mat-form-field>
-            <input matInput type="password" class="form-control" formControlName="description" placeholder="Entrez votre description ici">
-           </mat-form-field>
-        <p>Representant</p>
-         <mat-form-field>
-          <input matInput type="text" class="form-control" formControlName="representant" >
-        </mat-form-field>
-        <p>Telephone</p>
-        <mat-form-field>
-            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 0382..." >
-        </mat-form-field>
         <p>Email</p>
         <mat-form-field>
             <input matInput type="text" class="form-control" formControlName="email" placeholder="Ex : nom.prenom@adresse.com" >
         </mat-form-field>
+        <p>Telephone</p>
+        <mat-form-field>
+            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 03XXXXXXXX" >
+        </mat-form-field>
+        <p>Description</p>
+           <mat-form-field>
+            <input matInput type="password" class="form-control" formControlName="description" placeholder="Entrez votre description ici">
+           </mat-form-field>
         <p>Numero du registre</p>
          <mat-form-field>
           <input matInput type="text" class="form-control" formControlName="numeroRegistre">
@@ -98,7 +94,7 @@
         <mat-form-field>
             <input matInput type="text" class="form-control" formControlName="service" >
         </mat-form-field>
-        <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
+        <button mat-button [disabled]="!suggestFormService.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
     
        </form>
     </mat-tab>
