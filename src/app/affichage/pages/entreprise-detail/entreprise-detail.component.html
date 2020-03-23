@@ -22,7 +22,7 @@
     <div class="etoiles">
         <span *ngFor="let star of yellowStarDisplayer">
             <span><img class="etoile" src="../../assets/Etoile_jaune.png" /></span>
-        </span> -->
+        </span>
         <!--<span *ngIf="!isInteger(entreprise.note)">
             <img class="etoile" src="../../assets/Etoile_demi.PNG" />
         </span>
@@ -40,24 +40,6 @@
     <mat-radio-button class="example-margin" value="NonAFNOR">Non AFNOR uniquement</mat-radio-button>
     <mat-radio-button class="example-margin" value="AFetNonAF">Tous</mat-radio-button>
 </mat-radio-group>
-
-<div class="services">
-    <span>
-        <h2>Services proposés:</h2>
-    </span>
-    <div *ngIf="entreprise.services.length == 0 ; else showServices">
-        Pas de services proposés connus
-    </div>
-    <ng-template #showServices>
-        <div *ngFor="let service of entreprise.services">
-            <ul>
-                <li>
-                    {{service}}
-                </li>
-            </ul>
-        </div>
-    </ng-template>
-</div>
 
 <div class="flex">
     <div class="flexElement1">
