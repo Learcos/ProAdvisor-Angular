@@ -31,19 +31,15 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.mapInitializer();
-    //this.findLocation("New York, USA");
   }
 
   mapInitializer() {
     this.map = new google.maps.Map(this.gmap.nativeElement,
       this.mapOptions);
-    this.createMarker(this.coordinates);
-    /*this.entreprises.forEach(entreprise => {
-      this.lat = entreprise.adresse.lat;
-      this.lng = entreprise.adresse.lng;
-      this.coordinates = new google.maps.LatLng(this.lat, this.lng);
-      this.createMarker(this.coordinates);
-    });*/
+    //this.createMarker(this.coordinates);
+    this.entreprises.forEach(entreprise => {
+      this.findLocation(entreprise.adresse);
+    });
   }
 
   createMarker(coord) {
@@ -55,7 +51,7 @@ export class MapComponent implements AfterViewInit {
   }
 
 
-  /*findLocation(address) {
+  findLocation(address) {
 
     if (!this.geocoder) this.geocoder = new google.maps.Geocoder()
     this.geocoder.geocode({
@@ -76,5 +72,5 @@ export class MapComponent implements AfterViewInit {
         alert('Sorry, this search produced no results.' + status);
       }
     })
-  }*/
+  }
 }
