@@ -34,7 +34,10 @@ export class ServiceApiService {
   }
 
   getServiceByURL(urlService: string): Observable<ServiceApi> {
-    console.log(this.servicesUrl + urlService);
+    if(urlService.includes('/')){
+      urlService = urlService.substring(urlService.lastIndexOf('/') + 1);
+    }
+    console.log('urlService: ' + urlService);
     return this.http.get<ServiceApi>(this.servicesUrl + urlService)
       .pipe(
         catchError(this.handleError<ServiceApi>('getServiceByURL'))
@@ -48,7 +51,6 @@ export class ServiceApiService {
   }
 
   retrieveServiceClique(): ServiceApi {
-    console.log("retrieve service clique");
     return JSON.parse(localStorage.getItem('service'));
   }
 

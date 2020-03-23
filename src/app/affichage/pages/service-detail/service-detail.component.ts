@@ -72,17 +72,19 @@ export class ServiceDetailComponent implements OnInit {
   }
 
   remplitSources() {
-    this.commentaires.forEach(commentaire => {
-      if (commentaire.source != null && commentaire.source != undefined && commentaire.source != "") {
-        let pasDansLeTableau: boolean = true;
-        if (this.sourcesCommentaires.length > 0) {
-          this.sourcesCommentaires.forEach(source => {
-            if (commentaire.source = source) pasDansLeTableau = false;
-          });
+    if (this.commentaires) {
+      this.commentaires.forEach(commentaire => {
+        if (commentaire.source != null && commentaire.source != undefined && commentaire.source != "") {
+          let pasDansLeTableau: boolean = true;
+          if (this.sourcesCommentaires.length > 0) {
+            this.sourcesCommentaires.forEach(source => {
+              if (commentaire.source = source) pasDansLeTableau = false;
+            });
+          }
+          if (pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
         }
-        if (pasDansLeTableau) this.sourcesCommentaires.push(commentaire.source)
-      }
-    });
+      });
+    }
   }
 
   storeDateMin(dateMin: any) {

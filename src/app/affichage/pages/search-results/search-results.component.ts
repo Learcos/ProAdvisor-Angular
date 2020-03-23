@@ -45,6 +45,9 @@ export class SearchResultsComponent implements OnInit {
     this.serviceService.getServices()
       .subscribe(services => {
         this.services = services;
+        this.services.forEach(service => {
+          service.urlService = this.removeHTTP_URL(service.urlService);
+        });
       });
   }
 
@@ -76,6 +79,13 @@ export class SearchResultsComponent implements OnInit {
       })
     }
   }*/
+
+  removeHTTP_URL(url: string): string{
+    if(url.includes("/")){
+      url = url.substring(url.lastIndexOf("/") +1);
+    }
+    return url;
+  }
 
 
   // les entreprises sont récupérées juste après la création du composant avec ngOnInit()
