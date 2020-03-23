@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class PageSuggestionComponent implements OnInit {
 
   suggestForm: FormGroup;
+  pagesupp: boolean = true;
 
   constructor(private fb: FormBuilder) { }
 
@@ -32,13 +33,15 @@ export class PageSuggestionComponent implements OnInit {
   }
 
   suggestEntreprise() {
-    console.log('Données du formulaire...', this.suggestForm.get('username').value);
+    console.log('Données du formulaire...', this.suggestForm.get('nom').value);
     console.log('Données du formulaire...', this.suggestForm.value);
+    this.pagesupp = false;
   }
 
   suggestSW() {
-    console.log('Données du formulaire...', this.suggestForm.get('nomEntreprise').value);
+    console.log('Données du formulaire...', this.suggestForm.get('nom').value);
     console.log('Données du formulaire...', this.suggestForm.value);
+    this.pagesupp = false;
   }
 
 }

@@ -1,4 +1,7 @@
 <app-top-bar></app-top-bar>
+
+
+<div *ngIf="pagesupp; else valid">
 <mat-tab-group dynamicHeight>
     <mat-tab label = "Entreprise">
         <form [formGroup]="suggestForm" (ngSubmit)="suggestEntreprise()">
@@ -52,7 +55,7 @@
             <input matInput type="text" class="form-control" formControlName="zoneIntervention" >
         </mat-form-field>
         <p>
-            <button mat-button [disabled]="!suggestForm.valid" routerLink="/validation" type="submit" class="btn btn-primary">Valider le formulaire</button>
+            <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
          </p>
     
        </form>
@@ -81,7 +84,7 @@
         </mat-form-field>
         <p>Telephone</p>
         <mat-form-field>
-            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 0382829539" >
+            <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Ex : 0382..." >
         </mat-form-field>
         <p>Email</p>
         <mat-form-field>
@@ -95,8 +98,13 @@
         <mat-form-field>
             <input matInput type="text" class="form-control" formControlName="service" >
         </mat-form-field>
-        <button mat-button [disabled]="!suggestForm.valid" routerLink="/validation" type="submit" class="btn btn-primary">Valider le formulaire</button>
+        <button mat-button [disabled]="!suggestForm.valid" type="submit" class="btn btn-primary">Valider le formulaire</button>
     
        </form>
     </mat-tab>
 </mat-tab-group>
+</div>
+<ng-template #valid>
+    <p style="text-align: center;font-size:40px">Merci de votre participation, votre suggestion sera bien prise en compte.</p> <p style="text-align: center;"><li><a routerLink='/accueil'>Pour revenir sur la page d'acceuil, veuillez cliquer sur ce lien</a></li></p>
+</ng-template>
+

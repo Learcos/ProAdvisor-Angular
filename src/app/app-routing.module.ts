@@ -5,14 +5,12 @@ import { SearchResultsComponent } from './affichage/pages/search-results/search-
 import { EntrepriseDetailComponent } from './affichage/pages/entreprise-detail/entreprise-detail.component';
 import { ServiceDetailComponent } from './affichage/pages/service-detail/service-detail.component';
 import { PageSuggestionComponent } from './affichage/pages/page-suggestion/page-suggestion.component';
-import { ValidationComponent } from './affichage/pages/validation/validation.component';
 
 
 const routes: Routes = [
   { path: 'accueil', component: PageAccueilComponent },
   { path: 'entreprises', component: SearchResultsComponent},
   { path: 'suggestion', component: PageSuggestionComponent},
-  { path: 'validation', component: ValidationComponent},
   { path: 'entreprises/:siret', component: EntrepriseDetailComponent, data: {entreprise: 'entreprise'}},
   { path: 'services/:url', component: ServiceDetailComponent, data: {service: 'service'}},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }

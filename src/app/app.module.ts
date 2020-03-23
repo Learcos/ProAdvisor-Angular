@@ -26,7 +26,6 @@ import { MatTabsModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ValidationComponent } from './affichage/pages/validation/validation.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { ValidationComponent } from './affichage/pages/validation/validation.com
     ServiceViewTemplateComponent,
     ServiceDetailComponent,
     PageSuggestionComponent,
-    ValidationComponent
   ],
   imports: [
     BrowserModule,
