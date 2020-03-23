@@ -1,33 +1,7 @@
 <app-top-bar></app-top-bar>
 
 
-<div class="row small-padding-bg">
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <div class="image-size"><img src='../../assets/logo-entreprise.png'/></div>
-    </div>
-    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 customs-p">
-        <h3>{{entreprise.nom}}</h3>
-        <div class="etoiles">
-            <span *ngFor="let star of yellowStarDisplayer">
-                <span><img class="etoile" src="../../assets/Etoile_jaune.png" /></span>
-            </span>
-            <!--<span *ngIf="!isInteger(entreprise.note)">
-                <img class="etoile" src="../../assets/Etoile_demi.PNG" />
-            </span>
-        -->
-            <span *ngFor="let star of greyStarDisplayer">
-                <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
-            </span>
-        </div>
-        <app-etoile-pourcentage class="pourcentage" [commentaires]="commentaires"></app-etoile-pourcentage>
-
-        <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span>{{entreprise.telephone}}</p>
-        <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>{{entreprise.adresse}}</p>
-        <p><span><i class="fa fa-location-arrow" aria-hidden="true"></i></span>{{entreprise.ville}} - {{entreprise.codePostal}}</p>
-    </div>
-</div>
-
- <!--
+ 
 <div class="globalContainer">
     <div class="imageEtInfos">
         <div class="image">
@@ -38,13 +12,12 @@
             <div class="nom">
                 {{entreprise.nom}}
             </div>
-            //<div class="categories">
+            <!--<div class="categories">
                 <div class="categorie" *ngFor="let categorie of entreprise.categories">
                     {{categorie.name}}
                  </div>
-            </div>
-        -->
-       <!-- </div>
+            </div>-->
+        </div>
     </div>
     <div class="etoiles">
         <span *ngFor="let star of yellowStarDisplayer">
@@ -54,7 +27,7 @@
             <img class="etoile" src="../../assets/Etoile_demi.PNG" />
         </span>
     -->
-      <!--  <span *ngFor="let star of greyStarDisplayer">
+        <span *ngFor="let star of greyStarDisplayer">
             <span><img class="etoile" src="../../assets/Etoile_grise.png" /></span>
         </span>
     </div>
@@ -68,7 +41,7 @@
     <mat-radio-button class="example-margin" value="AFetNonAF">Tous</mat-radio-button>
 </mat-radio-group>
 
-<!-- <div class="services">
+<div class="services">
     <span>
         <h2>Services proposés:</h2>
     </span>
@@ -84,7 +57,7 @@
             </ul>
         </div>
     </ng-template>
-</div> -->
+</div>
 
 <div class="flex">
     <div class="flexElement1">
