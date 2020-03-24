@@ -21,7 +21,7 @@ export class MapComponent implements AfterViewInit {
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
-    zoom: 6
+    zoom: 12
   };
 
   marker = new google.maps.Marker({
