@@ -98,6 +98,22 @@
         <mat-card class="example-card">
             <mat-card-header>
                 <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Nombre de commentaires</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngIf="!commentairesValides(commentaires) ; else showCommentaires">
+                    Pas de commentaires
+                </div>
+                <ng-template #showCommentaires>
+                    <div>
+                        {{commentairesFiltres.length}}
+                    </div>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
                 <mat-card-title>Services proposés</mat-card-title>
             </mat-card-header>
             <mat-card-content>
