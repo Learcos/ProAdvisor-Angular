@@ -4,7 +4,7 @@
   text-decoration: none;
   align-items: center;
   color: black;
-  margin-bottom: 2%;
+  padding-bottom: 2%;
 }
 
 .imageEtInfos {
@@ -26,6 +26,10 @@
   display: flex;
 }
 
+.displayFlex {
+  display: flex;
+}
+
 .logo {
   border: 2px solid gray;
   border-radius: 50%;
@@ -36,14 +40,6 @@
 .image {
   width: 125px;
   padding: 1px 5px 1px 8px;
-}
-
-.categories {
-  display: flex;
-}
-
-.categorie {
-  padding-right: 4px;
 }
 
 .etoile {
@@ -57,20 +53,35 @@
   padding-bottom: 15px;
 }
 
-.commentairesContainer{
+.checkboxes {
+  margin-left: 17%;
+  padding-bottom: 1%;
+  padding-top: 2%;
+}
+
+.marginLeft {
   margin-left: 15%;
 }
 
-.services{
-  position: relative;
+.services {
+  position: fixed;
   margin-left: 65%;
   border: solid 1px;
   width: max-content;
 }
 
-mat-radio-group{
-  margin-left: 15%;
+mat-radio-button {
+  padding-bottom: 2%;
+  padding-left: 2%;
+}
+
+mat-expansion-panel {
+  width: 49%;
   margin-bottom: 2%;
+}
+
+.mat-raised-button {
+  float: right;
 }
 
 .flex{
@@ -83,5 +94,9 @@ mat-radio-group{
 }
 
 .flexElement2{
-  width: 30%; 
+  width: 25%; 
+}
+
+.commentairesContainer{
+  margin-left: 15%;
 }
